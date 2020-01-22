@@ -1,0 +1,45 @@
+// User variables:
+
+// Bootstrap compatible gutter variable => $gutter
+
+
+// // Breakpoints mixin settings (node_modules/bootstrap/scss/mixins/_breakpoints.scss)
+// // Example: +media-breakpoint-down(xs) - ≥576px / +media-breakpoint-up(sm) - // ≤576px
+// // Default variables: node_modules/bootstrap/scss/_variables.scss
+// $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
+
+$background-color-container: #EEEEEE
+$card-hover-color: #E3D9E2
+$color-grey: #666
+$color-grey-light: #777
+
+$font-stack: Helvetica, sans-serif
+
+@mixin flex-center
+    display: flex
+    justify-content: space-between
+    align-items: center
+@mixin event_tag
+    background-color: #f1f1f1
+    color: $color-grey
+    padding: 3px 4px
+    letter-spacing: .5px
+    line-height: 12px
+    font-size: 8px
+    border-radius: 4px
+    width: fit-content
+@mixin event_by
+    color: $color-grey-light
+    font-size: 12px
+@mixin for_icon
+    width: 15px
+    margin-right: 5px
+@mixin input_submit
+    width: 100%
+    background-color: #45bced
+    color: white
+    padding: 5px 10px
+    margin: 8px 0
+    border: none
+    border-radius: 4px
+    font-size: 12px

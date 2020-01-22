@@ -1,0 +1,120 @@
+@import vars
+@import fonts
+@import libs
+
+
+.container_event
+    width: 100%
+    margin: auto
+.event_img
+    display: flex
+    margin: auto
+    width: 100%
+    max-height: 530px
+    object-fit: cover
+.container_event_info
+    position: relative
+    width: 80%
+    margin: -90px auto
+    box-shadow: 0 4px 12px rgba(0,0,0,.08)
+    padding: 32px 48px
+    background-color: #fff
+    border-radius: 6px
+.container_event_title_tag
+    @include flex-center
+.event_info_title
+    font-size: 28px
+.event_info_tag
+    @include event_tag
+    font-size: 15px
+    padding: 6px 8px
+    margin-left: 10px
+.event_info_by
+    @include event_by
+    font-size: 17px
+.info_location_icon, .info_price_icon, .info_date_icon
+    @include for_icon
+    width: 30px
+    margin-right: 15px
+.info_event_location, .info_event_price, .info_event_date
+    display: flex
+    align-items: center
+    font-size: 20px
+    color: $color-grey-light
+    margin-top: 20px
+.group_tags
+    display: flex
+    margin-top: 25px
+.container_btn
+    display: flex
+    justify-content: flex-end
+#btn_buy
+    @include input_submit
+    width: 20%
+    padding: 7px 10px
+    font-size: 16px
+    font-weight: 600
+.container_description
+    width: 70%
+    margin: 110px auto 0 auto
+.container_social_icon
+    display: flex
+    justify-content: center
+    margin-top: 20px
+    padding-bottom: 20px
+.social_icon
+    width: 40px
+    margin-right: 15px
+    cursor: pointer
+.social_icon:hover
+    filter: invert(0) sepia(0) saturate(3.4) hue-rotate(0deg) brightness(1.5)
+@media (min-width: 768px) and (max-width: 992px)
+    .container_event_title_tag
+        flex-direction: column
+        align-items: start
+    .event_info_tag
+        margin: 10px 0
+    #btn_buy
+        width: 135px
+
+@media (max-width: 768px)
+    .event_img
+        max-height: 350px
+    .container_event_info
+        margin: 0
+        width: 100%
+        padding: 20px 35px
+    .container_event_title_tag
+        flex-direction: column
+        align-items: start
+    .event_info_title
+        font-size: 24px
+    .event_info_tag
+        margin: 10px 0
+    .info_event_location, .info_event_price, .info_event_date
+        font-size: 18px
+        margin-top: 12px
+    .info_location_icon, .info_price_icon, .info_date_icon
+        width: 24px
+        margin-right: 10px
+    #btn_buy
+        margin-top: 10px
+        width: 100%
+    .container_description
+        margin: 30px auto 0 auto
+    .social_icon
+        width: 30px
+
+@media (max-width: 576px)
+    .container_description
+        width: 90%
+    .event_info_title
+        font-size: 20px
+    .info_event_location, .info_event_price, .info_event_date
+        font-size: 15px
+        margin-top: 10px
+    .info_location_icon, .info_price_icon, .info_date_icon
+        width: 22px
+    .event_info_tag
+        font-size: 12px
+        padding: 4px 6px

@@ -1,0 +1,179 @@
+@import vars
+@import fonts
+@import libs
+
+@import event-page
+
+*
+    margin: 0
+.container_menu
+    @include flex-center
+    width: 100%
+    height: 70px
+    background-color: white
+.nav_bar
+    width: 90%
+    @include flex-center
+    margin: auto
+.logo
+    width: 200px
+.container
+    background-color: $background-color-container
+    width: 100%
+.container_list_search
+	display: flex
+	justify-content: space-between
+	width: 90%
+	margin: auto
+.container_search_event
+    width: 25%
+    margin-top: 47px
+.container_search_event_mob
+    width: 80%
+    margin: auto
+.container_list_events
+    width: 70%
+    padding-bottom: 15px
+hr
+    width: 40%
+    border: 0
+    border-top: 1px solid rgba(24,28,33,.06)
+.event_date_line
+    @include flex-center
+.event_date
+    padding: 10px 10px
+    color: $color-grey
+.event_card
+    @include flex-center
+    background-color: white
+    margin: 5px 0
+    border-radius: 10px
+    cursor: pointer
+    padding: 5px 10px
+.event_card_date_info
+    display: flex
+.event_card:hover
+    background-color: $card-hover-color
+.event_card_date
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    color: $color-grey
+    margin: 0 15px
+.event_title_tag
+    // display: flex
+.event_title
+    font-size: 15px
+    color: #074795
+.event_tag
+    @include event_tag
+.event_by
+    @include event_by
+.event_location_price, .event_location, .event_price
+    display: flex
+    align-items: center
+    font-size: 12px
+    color: $color-grey-light
+    margin-right: 20px
+.location_icon, .price_icon
+    @include for_icon
+.event_title_tag, .event_by, .event_location_price
+    margin-bottom: 4px
+.tags_info
+    display: flex
+.green_tag_info
+    background-color:#28a745
+    color: white
+    margin-right: 5px
+.close_icon
+    width: 16px
+    align-self: flex-start
+.close_icon_color 
+	fill: $color-grey
+.close_icon_color:hover
+	fill: black
+input[type=text], select 
+  padding: 3px 8px
+  display: inline-block
+  border: 1px solid #ccc
+  border-radius: 4px
+  box-sizing: border-box
+  font-size: 12px
+
+label
+    font-size: 14px
+    margin-bottom: 0
+input[type=submit]
+    @include input_submit
+input[type=submit]:hover
+  	opacity: 0.5
+.form_group
+	display: flex
+	flex-direction: column
+	margin-bottom: 5px
+.search_title
+    text-align: center
+    font-size: 16px
+    padding: 5px
+.search_toggle
+    width: 100%
+    display: flex
+    justify-content: center
+    display: none
+#search_icon
+    display: none
+    cursor: pointer
+.show_toggle_search
+    display: block
+.datepicker--day-name
+    color: #45bced !important
+.datepicker
+    width: auto !important
+footer
+    background-color: #AEB6BF
+.container_footer
+    width: 70%
+    margin: auto
+    display: flex
+    flex-direction: column
+    align-items: center
+.logo_footer
+    width: 130px
+    padding: 10px 0
+.group_payment_icon
+    margin-bottom: 10px
+@media (min-width: 768px) and (max-width: 992px)
+    .container_list_events
+        margin: auto
+        width: 65%
+    hr
+        width: 35%
+    .event_card_date
+        display: none
+@media (min-width: 200px) and (max-width: 768px)
+    #search_icon
+        display: block
+    .container_menu
+        height: 50px
+    .logo
+        width: 130px
+    .container_list_events
+        margin-left: 0
+        width: 100%
+    .event_cate_date, .container_search_event
+        display: none
+@media (max-width: 768px)
+	// .container_list_events
+	// 	margin-left: 0
+	// 	width: 100%
+	// .event_card_date, .container_search_event
+	//   	display: none
+@media (max-width: 576px)
+	.event_title_tag
+		flex-direction: column
+	.event_tag 
+		width: fit-content
+	hr
+		width: 25%
+		
