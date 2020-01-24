@@ -1,4 +1,21 @@
+// request
+// const axios = require('axios');
 
+// Make a request for a user with a given ID
+// axios.get('https://eventafisha.com/api/v1/events')
+//   .then(function (response) {
+//     // handle success
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     // handle error
+//     console.log(error);
+//   })
+//   .then(function () {
+//     // always executed
+//   });
+
+// request end
 
 var test = ""
 let searchIcon = document.getElementById("search_icon");
