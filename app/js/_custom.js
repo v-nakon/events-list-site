@@ -20,7 +20,7 @@ axios.get('https://eventafisha.com/api/v1/events')
 // request end
 
 function createEventCard(objItem) {
-	let test = 
+	let eventCardElements = 
 	`<div class="event_card_date_info">
 	<div class="event_card_date">
 		<div class="event_time">` + objItem.time + `</div>
@@ -55,7 +55,7 @@ function createEventCard(objItem) {
 	let eventCardElement = document.createElement('a');
 	eventCardElement.href = "/event-page.html?id=" + objItem.id;
 	eventCardElement.className = "event_card";
-	eventCardElement.innerHTML = test;
+	eventCardElement.innerHTML = eventCardElements;
   	listEventsElement.append(eventCardElement);
 }
 
