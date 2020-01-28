@@ -73,7 +73,7 @@ searchIcon.addEventListener("click", function() {
   $(function(){
 	$('.datepicker-here').datepicker({
 	   onSelect: function (dateText, inst) {
-		   test = dateText;
+		  let test = dateText;
 		  console.log(test)
 	   }
 	});
