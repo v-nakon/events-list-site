@@ -45,21 +45,22 @@
 	<div class="search_toggle">
 		<div class="container_search_event_mob">
 			<div class="datepicker-here" data-language='en'></div>
-			<div class="search_title">Search event</div>
+			<div class="search_title">Поиск мероприятия</div>
 			<div class="form_group">
-				<label for="event_name">Event name</label>
-				<input type="text" id="event_name" placeholder="Event name..">
+				<label for="event_name">Название мероприятия</label>
+				<input type="text" id="event_name_mob" placeholder="Название..">
 			</div>
 			<div class="form_group">
-				<label for="location">Location</label>
-				<input type="text" id="location" placeholder="Location..">
+				<label for="location">Город</label>
+				<select id="location_mob"></select>
 			</div>
-			<input class="btn_search" type="submit" value="Search">
+			<input class="btn_search" id="btn_search_mob" type="submit" value="Поиск">
 		</div>
 	</div>
 	<!-- MODAL CREATE EVENT -->
 	<div class="container_modal">
 		<div class="modal_content">
+			
 			<div class="modal_header">
 				<div class="modal_title">Создание мероприятия</div>
 				<span class="close_modal">&times;</span>
@@ -67,66 +68,69 @@
 			<div class="modal_inputs">
 				<div class="form_group">
 					<label for="modal_event_name">Название мероприятия</label>
-					<input type="text" id="modal_event_name" placeholder="Название..">
+					<input type="text" id="modal_event_name" placeholder="Название.." required>
 				</div>
 				<div class="form_group">
 					<label for="modal_start_date">Дата начала мероприятия</label>
-					<input type="date" id="modal_start_date">
+					<input type="text" onfocus="(this.type='date')" placeholder="Дата начала.." id="modal_start_date" required>
 				</div>
 				<div class="form_group">
 					<label for="modal_end_date">Дата конца мероприятия</label>
-					<input type="date" id="modal_end_date">
+					<input type="text" onfocus="(this.type='date')" placeholder="Дата конца.." id="modal_end_date" required>
 				</div>
 				<div class="form_group">
 					<label for="modal_time">Время начала мероприятия</label>
-					<input type="time" id="modal_time">
+					<input type="text" onfocus="(this.type='time')" placeholder="Время началаюю" id="modal_time" required>
 				</div>
 				<div class="form_group">
 					<label for="modal_price">Цена мероприятия</label>
-					<input type="text" id="modal_price" placeholder="Цена..">
+					<input type="text" id="modal_price" placeholder="Цена.." required>
 				</div>
 				<div class="form_group">
 					<label for="modal_category">Категория мероприятия</label>
-					<select id="modal_category" name="modal_category">
+					<select id="modal_category" name="modal_category" required>
 					</select>
 				</div>
 				<div class="form_group">
 					<label for="modal_tags">Теги мероприятия</label>
-					<select id="modal_tags" name="modal_tags">
+					<select id="modal_tags" name="modal_tags" multiple required>
 					</select>
 				</div>
 				<div class="form_group">
 					<label for="modal_city">Город мероприятия</label>
-					<select id="modal_city" name="modal_city">
+					<select id="modal_city" name="modal_city" required>
 					</select>
 				</div>
 				<div class="form_group">
 					<label for="modal_address">Адрес мероприятия</label>
-					<input type="text" id="modal_address" placeholder="Название..">
+					<input type="text" id="modal_address" placeholder="Название.." required>
 				</div>
 				<div class="form_group">
 					<label for="modal_description">Описание мероприятия</label>
-					<textarea id="modal_description" placeholder="Описание.."></textarea>
+					<textarea id="modal_description" placeholder="Описание.." required></textarea>
 				</div>
 				<div class="form_group">
 					<label for="modal_img">Главная картинка мероприятия</label>
-					<input type="file" id="modal_img" accept="image/*">
+					<input type="file" id="modal_img" accept="image/*" required onchange="getBase64()">
 				</div>
-				<div class="form_group">
+				<!-- <div class="form_group">
 					<label for="modal_organizer">Организатор мероприятия</label>
-					<input type="text" id="modal_organizer" placeholder="Организатор..">
-				</div>
+					<input type="text" id="modal_organizer" placeholder="Организатор.." required>
+				</div> -->
 				<div class="form_group">
 					<label for="modal_url">Ссылка на покупку билета</label>
-					<input type="text" id="modal_url" placeholder="Ссылка..">
+					<input type="text" id="modal_url" placeholder="Ссылка.." required>
 				</div>
 				<div class="modal_title">Контактные данные</div>
 				<div class="form_group">
 					<label for="modal_client_info">Данные для обратной связи</label>
-					<textarea id="modal_client_info" placeholder="Email, номер телефона.."></textarea>
+					<textarea id="modal_client_info" placeholder="Email, номер телефона.." required></textarea>
 				</div>
-				<input id="submit_create_event" type="submit" value="Создать">
+				<!-- <input id="submit_create_event" type="submit" value="Создать" onclick="getInputValue()"> -->
+				<!-- <button  id="submit_create_event" value="Создать" onclick="getInputValue()">Создать</button> -->
+				<button  id="submit_create_event" value="Создать" onclick="getInputValue()">Создать</button>
 			</div>
+		
 		</div>
 	</div>
 	<!-- END MODAL CREATE EVENT -->
@@ -134,12 +138,12 @@
 <div class="container">
 	<div class="container_list_search">
 	<div class="container_list_events">
-		<!-- <a href="/event-page.html">test</a> -->
-		<div class="event_date_line">
+		
+		<!-- <div class="event_date_line">
 			<hr>
 			<div class="event_date">Mon, Jan 13</div>
 			<hr>
-		</div>
+		</div> -->
 		<!-- <div class="event_card">
 			<div class="event_card_date_info">
 			<div class="event_card_date">
@@ -175,16 +179,16 @@
 
 	<div class="container_search_event">
 		<div class="datepicker-here" data-language='en'></div>
-		<div class="search_title">Search event</div>
+		<div class="search_title">Поиск мероприятия</div>
 		<div class="form_group">
-			<label for="event_name">Event name</label>
-			<input type="text" id="event_name" placeholder="Event name..">
+			<label for="event_name">Название мероприятия</label>
+			<input type="text" id="event_name" placeholder="Название..">
 		</div>
 		<div class="form_group">
-			<label for="location">Location</label>
-			<input type="text" id="location" placeholder="Location..">
+			<label for="location">Город</label>
+			<select id="location"></select>
 		</div>
-		<input type="submit" value="Search">
+		<input type="submit" id="btn_search" value="Поиск">
 	</div>
 </div>
 </div>
