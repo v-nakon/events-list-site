@@ -72,6 +72,9 @@ hr
     @include event_tag
 .event_by
     @include event_by
+.event_time_mob
+    @include event_by
+    display: none
 .event_location_price, .event_location, .event_price
     display: flex
     align-items: center
@@ -80,7 +83,7 @@ hr
     margin-right: 20px
 .location_icon, .price_icon
     @include for_icon
-.event_title_tag, .event_by, .event_location_price
+.event_title_tag, .event_by, .event_location_price, .event_time_mob
     margin-bottom: 4px
 .tags_info
     display: flex
@@ -88,12 +91,12 @@ hr
     background-color:#28a745
     color: white
     margin-right: 5px
-.close_icon
-    width: 16px
+.info_icon
+    width: 18px
     align-self: flex-start
-.close_icon_color 
+.info_icon_color 
 	fill: $color-grey
-.close_icon_color:hover
+.info_icon_color:hover
 	fill: black
 input[type=text], select, input[type=date], input[type=time], input[type=file], input[address]
   padding: 3px 8px
@@ -225,6 +228,8 @@ footer
         width: 35%
     .event_card_date
         display: none
+    .event_time_mob
+        display: block
 @media (min-width: 200px) and (max-width: 768px)
     #search_icon
         display: block
@@ -240,6 +245,8 @@ footer
     .create_event_icon
         width: 20px
         margin-right: 15px
+    .event_time_mob
+        display: block
 @media (max-width: 768px)
 	// .container_list_events
 	// 	margin-left: 0

@@ -32,7 +32,9 @@
 <header>
 	<div class="container_menu">
 		<div class="nav_bar">
-			<img class="logo" src="https://app.eventlist.io/img/transparent-HQ.e6c3434f.png" alt="">
+			<a href="/">
+				<img class="logo" src="https://app.eventlist.io/img/transparent-HQ.e6c3434f.png" alt="">
+			</a>
 			<div class="container_search_create">
 				<div class="container_create_event">
 					<svg class="create_event_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#666" d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3.994 12.964l3.106 3.105-4.112.931 1.006-4.036zm9.994-3.764l-5.84 5.921-3.202-3.202 5.841-5.919 3.201 3.2z"/></svg>
@@ -52,7 +54,9 @@
 			</div>
 			<div class="form_group">
 				<label for="location">Город</label>
-				<select id="location_mob"></select>
+				<select id="location_mob">
+					<option value="">Все города</option>
+				</select>
 			</div>
 			<input class="btn_search" id="btn_search_mob" type="submit" value="Поиск">
 		</div>
@@ -147,8 +151,8 @@
 		<!-- <div class="event_card">
 			<div class="event_card_date_info">
 			<div class="event_card_date">
-				<div class="event_time">5:00 PM</div>
-				<div class="event_pst">PST</div>
+				<div class="event_time">30.01.2020</div>
+				<div class="event_pst">30.01.2020</div>
 			</div>
 			<div class="event_card_info">
 				<div class="event_title_tag">
@@ -156,6 +160,7 @@
 					<div class="event_tag">Webinar</div>
 				</div>
 				<div class="event_by">by Thinkful Las Vegas</div>
+				<div class="event_time_mob">30.01.2020</div>
 				<div class="event_location_price">
 					<div class="event_location">
 						<svg xmlns="http://www.w3.org/2000/svg" class="location_icon" viewBox="0 0 24 24"><path fill="#666" d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
@@ -172,7 +177,7 @@
 				</div>
 			</div>
 			</div>
-			<svg class="close_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="close_icon_color" d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
+			<svg xmlns="http://www.w3.org/2000/svg" class="info_icon" viewBox="0 0 24 24"><path class="info_icon_color" d="M14 18l10-7.088-10-6.912v3.042s-11.618 2.583-14 12.958c5.072-5.431 14-5.218 14-5.218v3.218z"/></svg>
 		</div> -->
 
 	</div>
@@ -186,7 +191,9 @@
 		</div>
 		<div class="form_group">
 			<label for="location">Город</label>
-			<select id="location"></select>
+			<select id="location">
+				<option value="">Все города</option>
+			</select>
 		</div>
 		<input type="submit" id="btn_search" value="Поиск">
 	</div>
