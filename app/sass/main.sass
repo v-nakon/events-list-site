@@ -173,11 +173,11 @@ footer
 
 // MODAL CREATE EVENT
 /* The Modal (background) */
-.container_modal
+.container_modal, .container_modal_moderation
     display: none
     position: fixed
     z-index: 99999999
-    padding-top: 100px
+    padding-top: 50px
     left: 0
     top: 0
     width: 100%
@@ -188,20 +188,21 @@ footer
 
 /* Modal Content */
 .modal_content
-    background-color: #fefefe
-    margin: auto
-    padding: 20px
-    border: 1px solid #888
-    width: 80%
-
+    @include modal_content
+    width: 60%
+.modal_content_moderation
+    @include modal_content
+    width: 50%
 /* The Close Button */
-.close_modal
+.close_modal, .close_modal_moderation
     color: #aaaaaa
     float: right
     font-size: 28px
     font-weight: bold
 .close_modal:hover,
-.close_modal:focus
+.close_modal:focus,
+.close_modal_moderation:hover,
+.close_modal_moderation:focus
     color: #000
     text-decoration: none
     cursor: pointer
@@ -212,12 +213,14 @@ footer
 #submit_create_event
     @include input_submit
     width: 20%
-    margin: auto
+    margin-top: 10px
 
 // END MODAL CREATE EVENT
 
 // VALIDATION
-
+.error_msg
+    color: red
+    font-size: 10px;
 
 // END VALIDATION
 @media (min-width: 768px) and (max-width: 992px)
