@@ -5,9 +5,16 @@ var searchNameMob = document.querySelector("#event_name_mob");
 var searchLocationMob = document.querySelector("#location_mob");
 var searchName = document.querySelector("#event_name");
 var searchLocation = document.querySelector("#location");
+var modalNotFound = document.querySelector(".container_modal_notfound");
+var closeModalNotfound = document.querySelector(".close_modal_notfound");
 // getAllEvents();
 getCities("location");
 getCities("location_mob");
+
+closeModalNotfound.addEventListener("click", function() {
+	modalNotFound.style.display = "none";
+	document.location.href = "/";
+  });
 
 searchIcon.addEventListener("click", () => showHideSearch());
 
@@ -160,10 +167,15 @@ $(function(){
 		  callback: function(response, pagination) {
 			window.console && console.log(22, response, pagination.pageNumber);
 			console.log(pagination.pageNumber);
-			removeEventList();
-			$.each(response, function (index, item) {
-				createEventCard(item);
-			});
+			console.log("res len", response.length);
+			if(response.length === 0) {
+				modalNotFound.style.display = "block";
+			} else {
+				removeEventList();
+				$.each(response, function (index, item) {
+					createEventCard(item);
+				});
+			}
 			searchName.value = "";
 			searchLocation.value = "";
 			

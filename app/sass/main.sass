@@ -173,7 +173,7 @@ footer
 
 // MODAL CREATE EVENT
 /* The Modal (background) */
-.container_modal, .container_modal_moderation
+.container_modal, .container_modal_moderation, .container_modal_error, .container_modal_notfound
     display: none
     position: fixed
     z-index: 99999999
@@ -190,11 +190,11 @@ footer
 .modal_content
     @include modal_content
     width: 60%
-.modal_content_moderation
+.modal_content_moderation, .modal_content_error, .modal_content_notfound
     @include modal_content
     width: 50%
 /* The Close Button */
-.close_modal, .close_modal_moderation
+.close_modal, .close_modal_moderation, .close_modal_error, .close_modal_notfound
     color: #aaaaaa
     float: right
     font-size: 28px
@@ -202,7 +202,11 @@ footer
 .close_modal:hover,
 .close_modal:focus,
 .close_modal_moderation:hover,
-.close_modal_moderation:focus
+.close_modal_moderation:focus,
+.close_modal_error:hover,
+.close_modal_error:focus,
+.close_modal_notfound:hover,
+.close_modal_notfound:focus
     color: #000
     text-decoration: none
     cursor: pointer

@@ -3,7 +3,9 @@ var modal = document.querySelector(".container_modal");
 var createEventBtn = document.querySelector(".container_create_event");
 var closeModal = document.querySelector(".close_modal");
 var modalModeration = document.querySelector(".container_modal_moderation");
+var modalModerationError = document.querySelector(".container_modal_error");
 var closeModalModeration = document.querySelector(".close_modal_moderation");
+var closeModalError = document.querySelector(".close_modal_error");
 var submitCreateEvent = document.querySelector("#submit_create_event");
 var imgBase64 = "";
 // INPUTS VARIABLE
@@ -36,6 +38,10 @@ closeModal.addEventListener("click", function() {
 });
 closeModalModeration.addEventListener("click", function() {
   modalModeration.style.display = "none";
+  document.location.href = "/";
+});
+closeModalError.addEventListener("click", function() {
+  modalModerationError.style.display = "none";
   document.location.href = "/";
 });
 submitCreateEvent.addEventListener("click", function() {
@@ -116,6 +122,7 @@ function createEvent() {
      })
      .catch(function (error) {
         console.log(error);
+        modalModerationError.style.display = "block";
      });
 };
 function addOptionSelect(item, elementSelect) {
