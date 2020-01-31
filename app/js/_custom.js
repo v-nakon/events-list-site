@@ -19,9 +19,10 @@ function getAllEvents() {
 	axios.get('https://eventafisha.com/api/v1/events')
 	.then(function (response) {
 	  // handle success
+	  let allEvent = response.data.data;
 	  console.log(response.data);
-	  for(let item in response.data) {
-		  createEventCard(response.data[item]);
+	  for(let item in allEvent) {
+		  createEventCard(allEvent[item]);
 	  };
 	})
 	.catch(function (error) {
@@ -129,8 +130,9 @@ function searchRequest(title, city) {
      })
      .then(function (response) {
 		console.log(response);
-		for(let item in response.data) {
-			createEventCard(response.data[item]);
+		let searchResponse = response.data.data;
+		for(let item in searchResponse) {
+			createEventCard(searchResponse[item]);
 		};
 		if (window.matchMedia("(max-width: 768px)").matches){
 			showHideSearch();
@@ -154,3 +156,4 @@ $(function(){
 	   }
 	});
  });
+ 
