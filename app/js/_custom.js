@@ -1,12 +1,21 @@
 var searchIcon = document.getElementById("search_icon");
 var searchToggle = document.querySelector('.search_toggle');
 var listEventsElement = document.querySelector(".container_list_events");
-
-getAllEvents();
+var searchNameMob = document.querySelector("#event_name_mob");
+var searchLocationMob = document.querySelector("#location_mob");
+var searchName = document.querySelector("#event_name");
+var searchLocation = document.querySelector("#location");
+// getAllEvents();
 getCities("location");
 getCities("location_mob");
 
 searchIcon.addEventListener("click", () => showHideSearch());
+
+let btnSearch = document.getElementById("btn_search");
+btnSearch.addEventListener('click',() => searchTitleCity("event_name", "location"));
+
+let btnSearchMob = document.getElementById("btn_search_mob");
+btnSearchMob.addEventListener('click',() => searchTitleCity("event_name_mob", "location_mob"));
 
 function showHideSearch() {
 	if(!searchToggle.classList.contains("show_toggle_search")) {
@@ -15,24 +24,9 @@ function showHideSearch() {
 		searchToggle.classList.remove("show_toggle_search");
 	}
 };
-function getAllEvents() {
-	axios.get('https://eventafisha.com/api/v1/events')
-	.then(function (response) {
-	  // handle success
-	  let allEvent = response.data.data;
-	  console.log(response.data);
-	  for(let item in allEvent) {
-		  createEventCard(allEvent[item]);
-	  };
-	})
-	.catch(function (error) {
-	  // handle error
-	  console.log(error);
-	})
-	.then(function () {
-	  // always executed
-	});
-};
+function hideSearch(){
+	searchToggle.classList.remove("show_toggle_search");
+}
 function createTagsElement(arr) {
 	let tags = "";
 	for(let i=0; i < arr.length; i++) {
@@ -71,6 +65,7 @@ function createEventCard(objItem) {
 	// console.log(test);
 
 	let eventCardElement = document.createElement('a');
+	eventCardElement.setAttribute('target', '_blank');
 	eventCardElement.href = "/event-page.html?id=" + objItem.id;
 	eventCardElement.className = "event_card";
 	eventCardElement.innerHTML = eventCardElements;
@@ -113,41 +108,15 @@ function addOptionSelect(item, elementSelect) {
 function searchTitleCity(titleEl, cityEl) {
 	let nameEvent = document.getElementById(titleEl).value;
 	let cityEvent = document.getElementById(cityEl).value;
-	searchRequest(nameEvent, cityEvent);
+	// searchRequest(nameEvent, cityEvent);
+	paginationAjax('#pagination', nameEvent, cityEvent);
 }
-
-function searchRequest(title, city) {
-	console.log("title", title);
+function removeEventList() {
 	var listEventEl = document.querySelector(".container_list_events");
 	while (listEventEl.firstChild) {
 		listEventEl.removeChild(listEventEl.firstChild);
 	}
-	axios.get('https://eventafisha.com/api/v1/events', {
-		params: {
-			title: title,
-			city: city
-		  }
-     })
-     .then(function (response) {
-		console.log(response);
-		let searchResponse = response.data.data;
-		for(let item in searchResponse) {
-			createEventCard(searchResponse[item]);
-		};
-		if (window.matchMedia("(max-width: 768px)").matches){
-			showHideSearch();
-		}
-     })
-     .catch(function (error) {
-        console.log(error);
-     });
-};
-
-let btnSearch = document.getElementById("btn_search");
-btnSearch.addEventListener('click',() => searchTitleCity("event_name", "location"));
-
-let btnSearchMob = document.getElementById("btn_search_mob");
-btnSearchMob.addEventListener('click',() => searchTitleCity("event_name_mob", "location_mob"));
+}
 
 $(function(){
 	$('.datepicker-here').datepicker({
@@ -156,4 +125,140 @@ $(function(){
 	   }
 	});
  });
- 
+
+ $(function() {
+	paginationAjax('#pagination', '', '');
+});
+
+	function paginationAjax(name, title, city) {
+		var container = $(name);
+		container.pagination({
+		  dataSource: 'https://eventafisha.com/api/v1/events?title=' + title + '&city=' + city,
+		  locator: 'data',
+		  totalNumberLocator: function(dataSource) {
+			// you can return totalNumber by analyzing response content
+			console.log("test", dataSource.pagination.total)
+			return dataSource.pagination.total;
+		},
+		  pageSize: 15,
+		  showPageNumbers: true,
+		  showPrevious: true,
+		  showNext: true,
+		  // showNavigator: true,
+		  showFirstOnEllipsisShow: true,
+		  showLastOnEllipsisShow: true,
+		  className: 'paginationjs-theme-blue paginationjs-small',
+		  alias: {
+		  	pageNumber: 'page',
+			pageSize: 'limit',
+		  },
+		  ajax: {
+			// beforeSend: function() {
+			//   container.prev().html('Загрузка данных');
+			// }
+		  },
+		  callback: function(response, pagination) {
+			window.console && console.log(22, response, pagination.pageNumber);
+			console.log(pagination.pageNumber);
+			removeEventList();
+			$.each(response, function (index, item) {
+				createEventCard(item);
+			});
+			searchName.value = "";
+			searchLocation.value = "";
+			
+			if (window.matchMedia("(max-width: 768px)").matches){
+				hideSearch();
+				searchNameMob.value = "";
+				searchLocationMob.value = "";
+			}
+		  }
+		})
+	  };
+
+
+	//   function getAllEvents() {
+	// 	axios.get('https://eventafisha.com/api/v1/events')
+	// 	.then(function (response) {
+	// 	  // handle success
+	// 	  let allEvent = response.data.data;
+	// 	  console.log(response.data);
+	// 	  for(let item in allEvent) {
+	// 		  createEventCard(allEvent[item]);
+	// 	  };
+	// 	})
+	// 	.catch(function (error) {
+	// 	  // handle error
+	// 	  console.log(error);
+	// 	})
+	// 	.then(function () {
+	// 	  // always executed
+	// 	});
+	// };
+
+	//   function searchRequest(title, city) {
+	// 	console.log("title", title);
+	// 	removeEventList();
+	// 	axios.get('https://eventafisha.com/api/v1/events', {
+	// 		params: {
+	// 			title: title,
+	// 			city: city
+	// 		  }
+	// 	 })
+	// 	 .then(function (response) {
+	// 		console.log(response);
+	// 		let searchResponse = response.data.data;
+	// 		for(let item in searchResponse) {
+	// 			createEventCard(searchResponse[item]);
+	// 		};
+	// 		if (window.matchMedia("(max-width: 768px)").matches){
+	// 			showHideSearch();
+	// 		}
+	// 	 })
+	// 	 .catch(function (error) {
+	// 		console.log(error);
+	// 	 });
+	// };
+
+
+
+
+	//   $(function() {
+	// 	(function(name, title) {
+	// 	  var container = $(name);
+	// 	  container.pagination({
+	// 		dataSource: 'https://eventafisha.com/api/v1/events?title=' + title,
+	// 		locator: 'data',
+	// 		totalNumberLocator: function(dataSource) {
+	// 		  // you can return totalNumber by analyzing response content
+	// 		  console.log("test", dataSource.pagination.total)
+	// 		  return dataSource.pagination.total;
+	// 	  },
+	// 		pageSize: 15,
+	// 		showPageNumbers: true,
+	// 		showPrevious: true,
+	// 		showNext: true,
+	// 		// showNavigator: true,
+	// 		showFirstOnEllipsisShow: true,
+	// 		showLastOnEllipsisShow: true,
+	// 		className: 'paginationjs-theme-blue paginationjs-small',
+	// 		alias: {
+	// 			pageNumber: 'page',
+	// 		  pageSize: 'limit',
+	// 		},
+	// 		ajax: {
+	// 		  // beforeSend: function() {
+	// 		  //   container.prev().html('Загрузка данных');
+	// 		  // }
+	// 		},
+	// 		callback: function(response, pagination) {
+	// 		  window.console && console.log(22, response, pagination.pageNumber);
+	// 		  console.log(pagination.pageNumber);
+	// 		  removeEventList();
+	// 		  $.each(response, function (index, item) {
+	// 			  createEventCard(item);
+	// 		  });
+	// 		}
+	// 	  })
+	// 	})('#pagination', '');
+	//   });
