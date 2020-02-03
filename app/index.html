@@ -48,7 +48,11 @@
 	</div>
 	<div class="search_toggle">
 		<div class="container_search_event_mob">
-			<div class="datepicker-here" data-language='en'></div>
+			<div class="container_search_category">
+				<div class="search_category" id="search_webinar">Вебинары</div>
+				<div class="search_category" id="search_webinar2">Концерты</div>
+			</div>
+			<div class="datepicker-here"></div>
 			<div class="search_title">Поиск мероприятия</div>
 			<div class="form_group">
 				<label for="event_name">Название мероприятия</label>
@@ -142,15 +146,24 @@
 					<input type="text" id="modal_url" placeholder="Ссылка..">
 					<span id="error_url" class="error_msg"></span>
 				</div>
-				<div class="modal_title">Контактные данные</div>
+				<div class="modal_title">Данные для обратной связи</div>
 				<div class="form_group">
-					<label for="modal_client_info">Данные для обратной связи</label>
-					<textarea id="modal_client_info" placeholder="Email, номер телефона.."></textarea>
-					<span id="error_client_info" class="error_msg"></span>
+					<label for="modal_client_name">Имя</label>
+					<input type="text" id="modal_client_name" placeholder="Введите имя..">
+					<span id="error_client_name" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_client_email">Электронная почта</label>
+					<input type="email" id="modal_client_email" placeholder="Введите Email..">
+					<span id="error_client_email" class="error_msg"></span>
+				</div>
+				<div class="form_group">
+					<label for="modal_client_tel">Номер телефона</label>
+					<input type="text" id="modal_client_tel" placeholder="Введите номер телефон..">
 				</div>
 				<!-- <input id="submit_create_event" type="submit" value="Создать" onclick="getInputValue()"> -->
 				<!-- <!-- <button  id="submit_create_event" value="Создать" onclick="getInputValue()">Создать</button> -->
-				<button  id="submit_create_event" value="Создать">Создать</button>
+				<button id="submit_create_event" value="Создать">Создать</button>
 			</div>
 		
 		</div>
@@ -235,7 +248,11 @@
 	</div>
 
 	<div class="container_search_event">
-		<div class="datepicker-here" data-language='en'></div>
+		<div class="container_search_category">
+			<div class="search_category" id="search_webinar" onclick="paginationAjax('#pagination', '', '', '', '2')">Вебинары</div>
+			<div class="search_category" id="search_webinar3">Концерты</div>
+		</div>
+		<div class="datepicker-here"></div>
 		<div class="search_title">Поиск мероприятия</div>
 		<div class="form_group">
 			<label for="event_name">Название мероприятия</label>

@@ -18,6 +18,9 @@ closeModalNotfound.addEventListener("click", function() {
 
 searchIcon.addEventListener("click", () => showHideSearch());
 
+var webinarCategory = document.querySelector("#search_webinar3");
+webinarCategory.addEventListener('click',() => paginationAjax('#pagination', "", "", "", "1"));
+
 let btnSearch = document.getElementById("btn_search");
 btnSearch.addEventListener('click',() => searchTitleCity("event_name", "location"));
 
@@ -116,7 +119,7 @@ function searchTitleCity(titleEl, cityEl) {
 	let nameEvent = document.getElementById(titleEl).value;
 	let cityEvent = document.getElementById(cityEl).value;
 	// searchRequest(nameEvent, cityEvent);
-	paginationAjax('#pagination', nameEvent, cityEvent);
+	paginationAjax('#pagination', nameEvent, cityEvent, "", "");
 }
 function removeEventList() {
 	var listEventEl = document.querySelector(".container_list_events");
@@ -129,64 +132,83 @@ $(function(){
 	$('.datepicker-here').datepicker({
 	   onSelect: function (dateText, inst) {
 		  console.log(dateText)
+		  paginationAjax("#pagination", "", "", dateText, "");
 	   }
 	});
  });
 
  $(function() {
-	paginationAjax('#pagination', '', '');
+	paginationAjax('#pagination', '', '', '', '');
 });
 
-	function paginationAjax(name, title, city) {
-		var container = $(name);
-		container.pagination({
-		  dataSource: 'https://eventafisha.com/api/v1/events?title=' + title + '&city=' + city,
-		  locator: 'data',
-		  totalNumberLocator: function(dataSource) {
-			// you can return totalNumber by analyzing response content
-			console.log("test", dataSource.pagination.total)
-			return dataSource.pagination.total;
-		},
-		  pageSize: 15,
-		  showPageNumbers: true,
-		  showPrevious: true,
-		  showNext: true,
-		  // showNavigator: true,
-		  showFirstOnEllipsisShow: true,
-		  showLastOnEllipsisShow: true,
-		  className: 'paginationjs-theme-blue paginationjs-small',
-		  alias: {
-		  	pageNumber: 'page',
-			pageSize: 'limit',
-		  },
-		  ajax: {
-			// beforeSend: function() {
-			//   container.prev().html('Загрузка данных');
-			// }
-		  },
-		  callback: function(response, pagination) {
-			window.console && console.log(22, response, pagination.pageNumber);
-			console.log(pagination.pageNumber);
-			console.log("res len", response.length);
-			if(response.length === 0) {
-				modalNotFound.style.display = "block";
-			} else {
-				removeEventList();
-				$.each(response, function (index, item) {
-					createEventCard(item);
-				});
-			}
-			searchName.value = "";
-			searchLocation.value = "";
-			
-			if (window.matchMedia("(max-width: 768px)").matches){
-				hideSearch();
-				searchNameMob.value = "";
-				searchLocationMob.value = "";
-			}
-		  }
-		})
-	  };
+function checkSearchParam(title, city, date, category) {
+	let link = "https://eventafisha.com/api/v1/events?";
+	if(title !== "") {
+		link += "&title=" + title;
+	}
+	if(city !== "") {
+		link += "&city_id=" + city;
+	}
+	if(date !== "") {
+		link += "&date=" + date;
+	}
+	if(category !== "") {
+		link += "&category_id=" + category;
+	}
+	return link;
+};
+
+function paginationAjax(name, title, city, date, category) {
+	let url = checkSearchParam(title, city, date, category);
+	var container = $(name);
+	container.pagination({
+	  dataSource: url,
+	  locator: 'data',
+	  totalNumberLocator: function(dataSource) {
+		// you can return totalNumber by analyzing response content
+		console.log("test", dataSource.pagination.total)
+		return dataSource.pagination.total;
+	},
+	  pageSize: 15,
+	  showPageNumbers: true,
+	  showPrevious: true,
+	  showNext: true,
+	  // showNavigator: true,
+	  showFirstOnEllipsisShow: true,
+	  showLastOnEllipsisShow: true,
+	  className: 'paginationjs-theme-blue paginationjs-small',
+	  alias: {
+	  	pageNumber: 'page',
+		pageSize: 'limit',
+	  },
+	  ajax: {
+		// beforeSend: function() {
+		//   container.prev().html('Загрузка данных');
+		// }
+	  },
+	  callback: function(response, pagination) {
+		window.console && console.log(22, response, pagination.pageNumber);
+		console.log(pagination.pageNumber);
+		console.log("res len", response.length);
+		if(response.length === 0) {
+			modalNotFound.style.display = "block";
+		} else {
+			removeEventList();
+			$.each(response, function (index, item) {
+				createEventCard(item);
+			});
+		}
+		searchName.value = "";
+		searchLocation.value = "";
+		
+		if (window.matchMedia("(max-width: 768px)").matches){
+			hideSearch();
+			searchNameMob.value = "";
+			searchLocationMob.value = "";
+		}
+	  }
+	})
+  };
 
 
 	//   function getAllEvents() {

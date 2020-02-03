@@ -28,7 +28,7 @@
 	margin: auto
 .container_search_event
     width: 25%
-    margin-top: 47px
+    margin-top: 10px
 .container_search_event_mob
     width: 80%
     margin: auto
@@ -98,7 +98,7 @@ hr
 	fill: $color-grey
 .info_icon_color:hover
 	fill: black
-input[type=text], select, input[type=date], input[type=time], input[type=file], input[address]
+input[type=text], select, input[type=date], input[type=time], input[type=file], input[address], input[type=email]
   padding: 3px 8px
   display: inline-block
   border: 1px solid #ccc
@@ -218,7 +218,6 @@ footer
     @include input_submit
     width: 20%
     margin-top: 10px
-
 // END MODAL CREATE EVENT
 
 // VALIDATION
@@ -232,6 +231,15 @@ footer
     justify-content: center
     padding: 5px 0 20px 0
     background-color: $background-color-container
+.container_search_category
+    display: flex
+.search_category
+    margin: 0 10px 10px 0
+    font-weight: 600
+    cursor: pointer
+    color: #45bced
+.search_category:hover
+    color:#0793CB
 @media (min-width: 768px) and (max-width: 992px)
     .container_list_events
         margin: 0 auto

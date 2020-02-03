@@ -23,7 +23,9 @@ var descEvent = "";
 var imgEvent = "";
 // let organizerEvent = document.querySelector("#modal_organizer").value;
 var urlEvent = "";
-var clientInfoEvent = "";
+var clientName = "";
+var clientEmail = "";
+var clientTel = "";
 
 // END INPUTS VARIABLE
 getCategories();
@@ -113,7 +115,9 @@ function createEvent() {
         buy_link: urlEvent,
         desc: descEvent,
         image: imgEvent, //file
-        client: clientInfoEvent // info client(phone, mail ...)
+        organizer_fio: clientName,
+        organizer_phone: clientTel,
+        organizer_email: clientEmail
      })
      .then(function (response) {
         console.log(response);
@@ -157,7 +161,9 @@ function getModalInputs() {
   descEvent = document.querySelector("#modal_description").value;
   imgEvent = imgBase64;
   urlEvent = document.querySelector("#modal_url").value;
-  clientInfoEvent = document.querySelector("#modal_client_info").value;
+  clientName = document.querySelector("#modal_client_name").value;
+  clientEmail = document.querySelector("#modal_client_email").value;
+  clientTel = document.querySelector("#modal_client_tel").value;
   for (var i = 0; i < tagsElement.length; i++) {
     if (tagsElement.options[i].selected) tagsEvent.push(tagsElement.options[i].value);
   };
@@ -186,7 +192,8 @@ function inputsValidation() {
   let errorDescription = document.querySelector("#error_description");
   let errorImg = document.querySelector("#error_img");
   let errorUrl = document.querySelector("#error_url");
-  let errorClientInfo = document.querySelector("#error_client_info");
+  let errorClientName = document.querySelector("#error_client_name");
+  let errorClientEmail = document.querySelector("#error_client_email");
   if (nameEvent === "") {
     errorTitle.innerHTML = 'Поле "Название мероприятия" не должно быть пустым!';
     return;
@@ -247,11 +254,17 @@ function inputsValidation() {
   } else {
     errorUrl.innerHTML = '';
   }
-  if (clientInfoEvent === "") {
-    errorClientInfo.innerHTML = 'Поле "Данные для обратной связи" не должно быть пустым!';
+  if (clientName === "") {
+    errorClientName.innerHTML = 'Поле "Имя" не должно быть пустым!';
     return;
   } else {
-    errorClientInfo.innerHTML = '';
+    errorClientName.innerHTML = '';
+  }
+  if (clientEmail === "") {
+    errorClientEmail.innerHTML = 'Поле "Электронная почта" не должно быть пустым!';
+    return;
+  } else {
+    errorClientEmail.innerHTML = '';
   }
   createEvent();
 };
