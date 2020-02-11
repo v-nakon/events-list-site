@@ -10,8 +10,13 @@
     display: flex
     margin: auto
     width: 100%
-    max-height: 530px
+    max-height: 430px
     object-fit: cover
+    filter: blur(8px)
+    -webkit-filter: blur(8px)
+.img_desc
+    display: block
+    margin: 13px auto
 .container_event_info
     position: relative
     width: 80%
@@ -34,7 +39,8 @@
     font-size: 17px
 .info_location_icon, .info_price_icon, .info_date_icon
     @include for_icon
-    width: 30px
+    min-width: 30px
+    max-width: 30px
     margin-right: 15px
 .info_event_location, .info_event_price, .info_event_date
     display: flex
@@ -79,7 +85,11 @@
 
 @media (max-width: 768px)
     .event_img
-        max-height: 350px
+        max-height: 300px
+        filter: blur(0px)
+        -webkit-filter: blur(0px)
+    .img_desc
+        display: none
     .container_event_info
         margin: 0
         width: 100%

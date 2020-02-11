@@ -62,6 +62,9 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     //  console.log("https://eventafisha.com/storage/" + imgPath);
      let imgElement = document.querySelector(".event_img");
      imgElement.src = "https://eventafisha.com/storage/" + imgPath;
+
+     let imgDesc = document.querySelector(".img_desc");
+     imgDesc.src = "https://eventafisha.com/storage/" + imgPath;
  }
  function setCategory(obj) {
     let category = obj.category.title;
