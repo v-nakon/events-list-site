@@ -73,7 +73,7 @@ function setTags(obj) {
     let tagsElement = document.querySelector(".group_tags");
 	for(let i=0; i < obj.tags.length; i++) {
 		// console.log("tags", arr[i].title);
-		tags += '<div class="event_tag green_tag_info">' + obj.tags[i].title + '</div>';
+		tags += '<div class="event_tag green_tag_info event_tag_big">' + obj.tags[i].title + '</div>';
     };
     tagsElement.innerHTML = tags;
 }

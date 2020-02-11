@@ -3,6 +3,7 @@
 @import libs
 
 @import event-page
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap')
 
 *
     margin: 0
@@ -15,8 +16,22 @@
     width: 90%
     @include flex-center
     margin: auto
+.block_logo
+    display: flex
 .logo
-    width: 200px
+    width: 50px
+.logo_text
+    margin-left: 5px
+    font-size: 30px
+    font-weight: 600
+    color:#1D4B71 
+    text-transform: uppercase
+    font-family: 'Noto Sans JP', sans-serif
+.logo_text span
+    color:#2C80C6
+    font-weight: 400
+.nav_bar a
+    text-decoration: none !important 
 .container
     background-color: $background-color-container
     width: 100%
@@ -70,6 +85,9 @@ hr
     color: #074795
 .event_tag
     @include event_tag
+.event_tag_big
+    font-size: 12px
+    padding: 5px 8px
 .event_by
     @include event_by
 .event_time_mob
@@ -92,7 +110,10 @@ hr
     color: white
     margin-right: 5px
 .info_icon
-    width: 18px
+    margin-left: 5px
+    min-width: 18px
+    max-width: 18px
+    min-height: 18px
     align-self: flex-start
 .info_icon_color 
 	fill: $color-grey
@@ -150,8 +171,7 @@ footer
     flex-direction: column
     align-items: center
 .logo_footer
-    width: 130px
-    padding: 10px 0
+   padding: 10px
 .group_payment_icon
     margin-bottom: 10px
 .container_search_create 
@@ -256,7 +276,9 @@ footer
     .container_menu
         height: 50px
     .logo
-        width: 130px
+        width: 30px
+    .logo_text
+        font-size: 20px
     .container_list_events
         margin-left: 0
         width: 100%
@@ -282,4 +304,7 @@ footer
 		width: fit-content
 	hr
 		width: 25%
+@media (max-width: 300px)
+    .info_icon
+        display: none
 		
