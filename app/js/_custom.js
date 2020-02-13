@@ -137,7 +137,8 @@ $(function(){
 	   onSelect: function (dateText, inst) {
 		  console.log(dateText)
 		  paginationAjax("#pagination", "", "", dateText, "");
-	   }
+	   },
+	   minDate: new Date()
 	});
  });
 
