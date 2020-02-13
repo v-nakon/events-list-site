@@ -50,11 +50,15 @@ function createEventCard(objItem) {
 	let eventCardElements = 
 	`<div class="event_card_date_info">
 	<div class="event_card_date">
+		<img class="event_card_img" src="https://eventafisha.com/storage/` + objItem.images + `" alt="title">
 		<div class="event_time">` + new Date(objItem.start_date).toLocaleDateString() + `</div>
 	</div>
 	<div class="event_card_info">
 		<div class="event_title_tag">
-			<div class="event_title">` + objItem.title + `</div>
+			<div class="title_img_mob">
+				<img class="event_card_img_mob" src="https://eventafisha.com/storage/` + objItem.images + `" alt="title">
+				<div class="event_title">` + objItem.title + `</div>
+			</div>
 			<div class="event_tag">` + objItem.category.title + `</div>
 		</div>
 		<div class="event_time_mob">` + new Date(objItem.start_date).toLocaleDateString() + `</div>
