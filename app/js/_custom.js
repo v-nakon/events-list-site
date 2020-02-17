@@ -147,7 +147,7 @@ $(function(){
 });
 
 function checkSearchParam(title, city, date, category) {
-	let link = "https://eventafisha.com/api/v1/events?";
+	let link = "https://eventafisha.com/api/v1/events?paginate=";
 	if(title !== "") {
 		link += "&title=" + title;
 	}
@@ -171,10 +171,10 @@ function paginationAjax(name, title, city, date, category) {
 	  locator: 'data',
 	  totalNumberLocator: function(dataSource) {
 		// you can return totalNumber by analyzing response content
-		console.log("test", dataSource.pagination.total)
-		return dataSource.pagination.total;
+		console.log("test", dataSource.total)
+		return dataSource.total;
 	},
-	  pageSize: 15,
+	  pageSize: 20,
 	  showPageNumbers: true,
 	  showPrevious: true,
 	  showNext: true,
