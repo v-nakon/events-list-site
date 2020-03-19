@@ -261,6 +261,8 @@ footer
     @include input_submit
     width: 20%
     margin-top: 10px
+.datepicker_event_start
+    width: 100%
 // END MODAL CREATE EVENT
 
 // VALIDATION
@@ -278,11 +280,65 @@ footer
     display: flex
 .search_category
     margin: 0 10px 10px 0
-    font-weight: 600
+    font-weight: 400
     cursor: pointer
-    color: #45bced
-.search_category:hover
+    // color: #45bced
+    color: black
+.search_category:hover 
     color:#0793CB
+//start drop-down category
+.arrow_down, .arrow_down_mob
+	border: solid #666
+	border-width: 0 3px 3px 0
+	display: inline-block
+	padding: 4px
+	transform: rotate(45deg)
+	-webkit-transform: rotate(45deg)
+	margin-left: 5px
+.arrow_down:hover, .arrow_down_mob:hover
+    border-color: #0793CB
+.border_none 
+	border: none
+.dropdown_window, .dropdown_window_mob
+	position: relative
+	display: inline-block
+
+.dropdown_content, .dropdown_content_mob
+	display: none
+	position: absolute
+	right: -45px
+	top: 30px
+	background-color: #fff
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+	z-index: 99999
+.dropdown_content_mob
+    right: -60px
+.container_category
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	width: 400px
+.container_category_mob
+    display: flex
+    width: 280px
+    flex-direction: row
+    flex-wrap: wrap
+.item_category
+    font-size: 15px
+    color: black
+    padding: 10px 14px
+    min-width: 170px
+.container_category_mob .item_category
+    font-size: 12px
+    padding: 8px 12px
+    min-width: 110px
+.item_category:hover
+	color: #0793CB
+.show
+	display: block
+.color_active_cat 
+    color: #0793CB !important
+//end drop-down category
 @media (min-width: 768px) and (max-width: 992px)
     .container_list_events
         margin: 10px auto 0 auto
@@ -294,6 +350,9 @@ footer
     .event_time_mob, .event_card_img_mob
         display: block
 @media (min-width: 200px) and (max-width: 768px)
+    .event_location_price
+        flex-direction: column
+        align-items: flex-start
     #search_icon
         display: block
     .container_menu

@@ -49,9 +49,20 @@
 	</div>
 	<div class="search_toggle">
 		<div class="container_search_event_mob">
-			<div class="container_search_category">
+			<!-- <div class="container_search_category">
 				<div class="search_category" id="search_webinar">Вебинары</div>
 				<div class="search_category" id="search_webinar2">Концерты</div>
+			</div> -->
+			<div class="container_search_category">
+				<div class="search_category color_active_cat" id="search_cat_all_mob">Все</div>
+				<div class="search_category" id="search_cat_main1_mob">Концерты</div>
+				<div class="search_category" id="search_cat_main2_mob">Дизайн</div>
+				<div class="search_category border_none dropdown_window_mob">
+					<i class="arrow_down_mob dropbtn_mob"></i>
+					<div class="dropdown_content_mob">
+						<div class="container_category_mob"></div>
+					</div>
+				</div>
 			</div>
 			<div class="datepicker-here"></div>
 			<div class="search_title">Поиск мероприятия</div>
@@ -244,8 +255,15 @@
 
 	<div class="container_search_event">
 		<div class="container_search_category">
-			<div class="search_category" id="search_webinar" onclick="paginationAjax('#pagination', '', '', '', '2')">Вебинары</div>
-			<div class="search_category" id="search_webinar3">Концерты</div>
+			<div class="search_category color_active_cat" id="search_cat_all">Все</div>
+			<div class="search_category" id="search_cat_main1">Концерты</div>
+			<div class="search_category" id="search_cat_main2">Дизайн</div>
+			<div class="search_category border_none dropdown_window">
+				<i class="arrow_down dropbtn"></i>
+				<div class="dropdown_content">
+					<div class="container_category"></div>
+				</div>
+			</div>
 		</div>
 		<div class="datepicker-here"></div>
 		<div class="search_title">Поиск мероприятия</div>

@@ -17,6 +17,7 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     setImg(response.data);
     setCategory(response.data);
     setTags(response.data);
+    setPromo(response.data);
   })
   .catch(function (error) {
     // handle error
@@ -79,4 +80,9 @@ function setTags(obj) {
 		tags += '<div class="event_tag green_tag_info event_tag_big">' + obj.tags[i].title + '</div>';
     };
     tagsElement.innerHTML = tags;
+}
+function setPromo(obj) {
+    let promo = obj.promo;
+    let promoElement = document.querySelector(".promocode");
+    promoElement.innerHTML = promo;
 }
