@@ -282,7 +282,7 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 		// console.log("test", dataSource.total)
 		return dataSource.total;
 	},
-	  pageSize: 20,
+	  pageSize: 24,
 	  showPageNumbers: true,
 	  showPrevious: true,
 	  showNext: true,
