@@ -153,6 +153,8 @@ function addEventToElement(element, catId) {
 		console.log("CAT - ", catId);
 		element.classList.add("color_active_cat");
 		categorySearch = catId;
+		document.querySelector(".arrow_down").classList.add("color_active_cat");
+		paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
 	});
 };
 function delActiveColor() {
@@ -160,7 +162,6 @@ function delActiveColor() {
 	console.log("arr", arrActiveColor)
 	arrActiveColor.forEach(function(el){
 		el.classList.remove("color_active_cat");
-		// console.log("delete class")
 	})
 };
 // end categories for search
@@ -197,44 +198,44 @@ var categorySearch = '';
 var nameEventSearchMob = '';
 var cityEventSearchMob = '';
 var categorySearchMob = '';
+var arrElCat = [
+	{
+		el: document.querySelector("#search_cat_all"),
+		id: ""
+	}, 
+	{
+		el: document.querySelector("#search_cat_main1"),
+		id: 4
+	}, 
+	{
+		el: document.querySelector("#search_cat_main2"),
+		id: 5
+	},
+	{
+		el: document.querySelector("#search_cat_all_mob"),
+		id: ""
+	},
+	{
+		el: document.querySelector("#search_cat_main1_mob"),
+		id: 4
+	},
+	{
+		el: document.querySelector("#search_cat_main2_mob"),
+		id: 5
+	},
+];
+function addListenerToArrEl(arr) {
+	for(let i in arr) {
+		arr[i].el.addEventListener("click", function(){
+			delActiveColor();
+			arr[i].el.classList.add("color_active_cat");
+			categorySearch = arr[i].id;
+			paginationAjax('#pagination', nameEventSearch, cityEventSearch, fromDateSearch, toDateSearch, categorySearch);
+		});
+	}
+}
+addListenerToArrEl(arrElCat);
 
-var elCatAll = document.querySelector("#search_cat_all");
-var elCatMain1 = document.querySelector("#search_cat_main1");
-var elCatMain2 = document.querySelector("#search_cat_main2");
-var elCatAllMob = document.querySelector("#search_cat_all_mob");
-var elCatMain1Mob = document.querySelector("#search_cat_main1_mob");
-var elCatMain2Mob = document.querySelector("#search_cat_main2_mob");
-
-elCatAll.addEventListener("click", function(){
-	delActiveColor();
-	elCatAll.classList.add("color_active_cat");
-	categorySearch = '';
-});
-elCatMain1.addEventListener("click", function(){
-	delActiveColor();
-	elCatMain1.classList.add("color_active_cat");
-	categorySearch = 4;
-});
-elCatMain2.addEventListener("click", function(){
-	delActiveColor();
-	elCatMain2.classList.add("color_active_cat");
-	categorySearch = 5;
-});
-elCatAllMob.addEventListener("click", function(){
-	delActiveColor();
-	elCatAllMob.classList.add("color_active_cat");
-	categorySearchMob = '';
-});
-elCatMain1Mob.addEventListener("click", function(){
-	delActiveColor();
-	elCatMain1Mob.classList.add("color_active_cat");
-	categorySearchMob = 4;
-});
-elCatMain2Mob.addEventListener("click", function(){
-	delActiveColor();
-	elCatMain2Mob.classList.add("color_active_cat");
-	categorySearchMob = 5;
-});
 function searchTitleCity(titleEl, cityEl) {
 	nameEventSearch = document.getElementById(titleEl).value;
 	cityEventSearch = document.getElementById(cityEl).value;
@@ -341,119 +342,31 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
 btnShowCatMob.addEventListener("click", function() {
 	catWindowMob.classList.toggle("show");
 	});
-	// window.addEventListener("click", function(event) {
-	// 	console.log("CLICCKK");
-	// 	console.log(event.target);
-	// 	if (event.target != containerCatWindow && event.target == document.querySelector("body")) {
-	// 		catWindow.style.display = "none";
-	// 		console.log("hui")
-	// 	}
-	// });
-  // Close the dropdown if the user clicks outside of it CATEGORY
-  window.onclick = function(event) {
-	if (!event.target.matches('.dropbtn') && !event.target.matches('.container_category') && !event.target.matches('.item_category')) {
-		if (catWindow.classList.contains('show')) {
-			catWindow.classList.remove('show');
+window.onclick = function(event) {
+	if (!event.target.matches('.dropbtn')) {
+	  var dropdown = document.querySelector(".dropdown_content");
+		if (dropdown.classList.contains('show')) {
+			dropdown.classList.remove('show');
 		}
 	}
-	if (!event.target.matches('.dropbtn_mob') && !event.target.matches('.container_category_mob') && !event.target.matches('.item_category')) {
-		if (catWindowMob.classList.contains('show')) {
-			catWindowMob.classList.remove('show');
+	if (!event.target.matches('.dropbtn_mob')) {
+	  var dropdown_mob = document.querySelector(".dropdown_content_mob");
+		if (dropdown_mob.classList.contains('show')) {
+			dropdown_mob.classList.remove('show');
 		}
 	}
   };
 
-  
+  // Close the dropdown if the user clicks outside of it CATEGORY
 //   window.onclick = function(event) {
 // 	if (!event.target.matches('.dropbtn') && !event.target.matches('.container_category') && !event.target.matches('.item_category')) {
 // 		if (catWindow.classList.contains('show')) {
 // 			catWindow.classList.remove('show');
 // 		}
 // 	}
+// 	if (!event.target.matches('.dropbtn_mob') && !event.target.matches('.container_category_mob') && !event.target.matches('.item_category')) {
+// 		if (catWindowMob.classList.contains('show')) {
+// 			catWindowMob.classList.remove('show');
+// 		}
+// 	}
 //   };
-
-	//   function getAllEvents() {
-	// 	axios.get('https://eventafisha.com/api/v1/events')
-	// 	.then(function (response) {
-	// 	  // handle success
-	// 	  let allEvent = response.data.data;
-	// 	  console.log(response.data);
-	// 	  for(let item in allEvent) {
-	// 		  createEventCard(allEvent[item]);
-	// 	  };
-	// 	})
-	// 	.catch(function (error) {
-	// 	  // handle error
-	// 	  console.log(error);
-	// 	})
-	// 	.then(function () {
-	// 	  // always executed
-	// 	});
-	// };
-
-	//   function searchRequest(title, city) {
-	// 	console.log("title", title);
-	// 	removeEventList();
-	// 	axios.get('https://eventafisha.com/api/v1/events', {
-	// 		params: {
-	// 			title: title,
-	// 			city: city
-	// 		  }
-	// 	 })
-	// 	 .then(function (response) {
-	// 		console.log(response);
-	// 		let searchResponse = response.data.data;
-	// 		for(let item in searchResponse) {
-	// 			createEventCard(searchResponse[item]);
-	// 		};
-	// 		if (window.matchMedia("(max-width: 768px)").matches){
-	// 			showHideSearch();
-	// 		}
-	// 	 })
-	// 	 .catch(function (error) {
-	// 		console.log(error);
-	// 	 });
-	// };
-
-
-
-
-	//   $(function() {
-	// 	(function(name, title) {
-	// 	  var container = $(name);
-	// 	  container.pagination({
-	// 		dataSource: 'https://eventafisha.com/api/v1/events?title=' + title,
-	// 		locator: 'data',
-	// 		totalNumberLocator: function(dataSource) {
-	// 		  // you can return totalNumber by analyzing response content
-	// 		  console.log("test", dataSource.pagination.total)
-	// 		  return dataSource.pagination.total;
-	// 	  },
-	// 		pageSize: 15,
-	// 		showPageNumbers: true,
-	// 		showPrevious: true,
-	// 		showNext: true,
-	// 		// showNavigator: true,
-	// 		showFirstOnEllipsisShow: true,
-	// 		showLastOnEllipsisShow: true,
-	// 		className: 'paginationjs-theme-blue paginationjs-small',
-	// 		alias: {
-	// 			pageNumber: 'page',
-	// 		  pageSize: 'limit',
-	// 		},
-	// 		ajax: {
-	// 		  // beforeSend: function() {
-	// 		  //   container.prev().html('Загрузка данных');
-	// 		  // }
-	// 		},
-	// 		callback: function(response, pagination) {
-	// 		  window.console && console.log(22, response, pagination.pageNumber);
-	// 		  console.log(pagination.pageNumber);
-	// 		  removeEventList();
-	// 		  $.each(response, function (index, item) {
-	// 			  createEventCard(item);
-	// 		  });
-	// 		}
-	// 	  })
-	// 	})('#pagination', '');
-	//   });
