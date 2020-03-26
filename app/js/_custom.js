@@ -53,6 +53,7 @@ function createTagsElement(arr) {
   return tags;
 }
 function createEventCard(objItem) {
+  let costEvent = checkCostEvent(objItem.cost);
   let eventCardElements =
     `<div class="event_card_date_info">
 	<div class="event_card_date">
@@ -86,15 +87,10 @@ function createEventCard(objItem) {
 				<div class="location_name">` +
     objItem.address +
     `</div>
-			</div>
-			<div class="event_price">
-				<svg xmlns="http://www.w3.org/2000/svg" class="price_icon" viewBox="0 0 24 24"><path fill="#666" d="M22 4h-20c-1.104 0-2 .896-2 2v12c0 1.104.896 2 2 2h20c1.104 0 2-.896 2-2v-12c0-1.104-.896-2-2-2zm0 13.5c0 .276-.224.5-.5.5h-19c-.276 0-.5-.224-.5-.5v-6.5h20v6.5zm0-9.5h-20v-1.5c0-.276.224-.5.5-.5h19c.276 0 .5.224.5.5v1.5zm-9 6h-9v-1h9v1zm-3 2h-6v-1h6v1zm10-2h-3v-1h3v1z"/></svg>
-				<div class="price">` +
-    objItem.cost +
+			</div>`
+    + costEvent +
     `</div>
-			</div>
-		</div>
-		<div class="tags_info">` +
+    <div class="tags_info">` +
     createTagsElement(objItem.tags) +
     `</div>
 	</div>
@@ -108,6 +104,20 @@ function createEventCard(objItem) {
   eventCardElement.className = "event_card";
   eventCardElement.innerHTML = eventCardElements;
   listEventsElement.append(eventCardElement);
+};
+function checkCostEvent(cost) {
+  let tempEl = `<div class="event_price">
+  <svg xmlns="http://www.w3.org/2000/svg" class="price_icon" viewBox="0 0 24 24"><path fill="#666" d="M22 4h-20c-1.104 0-2 .896-2 2v12c0 1.104.896 2 2 2h20c1.104 0 2-.896 2-2v-12c0-1.104-.896-2-2-2zm0 13.5c0 .276-.224.5-.5.5h-19c-.276 0-.5-.224-.5-.5v-6.5h20v6.5zm0-9.5h-20v-1.5c0-.276.224-.5.5-.5h19c.276 0 .5.224.5.5v1.5zm-9 6h-9v-1h9v1zm-3 2h-6v-1h6v1zm10-2h-3v-1h3v1z"/></svg>
+  <div class="price">` +
+    cost +
+    `
+  </div>
+  </div>`;
+  if (cost == 0) {
+    return "";
+  } else {
+    return tempEl;
+  }
 }
 // end create element from response
 // media for search mob ver
@@ -243,7 +253,11 @@ var arrElCat = [
   },
   {
     el: document.querySelector("#search_cat_main2"),
-    id: 5
+    id: 20
+  },
+  {
+    el: document.querySelector("#search_cat_main3"),
+    id: 21
   },
   {
     el: document.querySelector("#search_cat_all_mob"),
@@ -255,7 +269,11 @@ var arrElCat = [
   },
   {
     el: document.querySelector("#search_cat_main2_mob"),
-    id: 5
+    id: 20
+  },
+  {
+    el: document.querySelector("#search_cat_main3_mob"),
+    id: 21
   }
 ];
 function addListenerToArrEl(arr) {
@@ -352,7 +370,6 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category) {
     callback: function (response, pagination) {
       // window.console && console.log(22, response, pagination.pageNumber);
       // console.log(pagination.pageNumber);
-      // console.log("res len", response.length);
       spinner.classList.add("hide_spinner");
       if (response.length === 0) {
         modalNotFound.style.display = "block";
