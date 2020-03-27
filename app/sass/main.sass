@@ -192,7 +192,8 @@ footer
     width: 70%
     margin: auto
     display: flex
-    flex-direction: column
+    flex-direction: row
+    justify-content: space-evenly
     align-items: center
 .logo_footer
    padding: 10px
@@ -217,7 +218,7 @@ footer
 
 // MODAL CREATE EVENT
 /* The Modal (background) */
-.container_modal, .container_modal_moderation, .container_modal_error, .container_modal_notfound
+.container_modal, .container_modal_moderation, .container_modal_error, .container_modal_notfound, .container_modal_report
     display: none
     position: fixed
     z-index: 99
@@ -234,11 +235,11 @@ footer
 .modal_content
     @include modal_content
     width: 60%
-.modal_content_moderation, .modal_content_error, .modal_content_notfound
+.modal_content_moderation, .modal_content_error, .modal_content_notfound, .modal_content_report
     @include modal_content
     width: 50%
 /* The Close Button */
-.close_modal, .close_modal_moderation, .close_modal_error, .close_modal_notfound
+.close_modal, .close_modal_moderation, .close_modal_error, .close_modal_notfound, .close_modal_report
     color: #aaaaaa
     margin-left: 5px
     font-size: 28px
@@ -250,7 +251,9 @@ footer
 .close_modal_error:hover,
 .close_modal_error:focus,
 .close_modal_notfound:hover,
-.close_modal_notfound:focus
+.close_modal_notfound:focus,
+.close_modal_report:hover,
+.close_modal_report:focus
     color: #000
     text-decoration: none
     cursor: pointer
@@ -258,7 +261,7 @@ footer
     @include flex-center
 .modal_title
     font-size: 18px
-#submit_create_event
+#submit_create_event, #submit_sent_report
     @include input_submit
     width: 20%
     margin-top: 10px
@@ -270,7 +273,7 @@ footer
 .error_msg
     color: red
     font-size: 10px
-
+    margin-top: 3px
 // END VALIDATION
 #pagination
     display: flex
@@ -279,6 +282,7 @@ footer
     background-color: $background-color-container
 .container_search_category
     display: flex
+    flex-wrap: wrap
 .search_category
     margin: 0 10px 10px 0
     font-weight: 400
@@ -368,7 +372,31 @@ footer
         transform: rotate(0deg)
     100%
         transform: rotate(360deg)
-// start block spinner
+// end block spinner
+// start modal report
+.report_label span 
+    color: red
+#modal_is_organizer
+    margin: 10px 10px 15px 10px
+.report_success, .report_error
+    display: none
+    text-align: center
+    color: #6EB838
+.report_error
+    color: #BF4C2D
+.report_success p, .report_error p
+    margin: 0
+// end modal report
+.btn_report_error
+    color: #3C527E
+    font-size: 13px
+    font-weight: 500
+    cursor: pointer
+.block_payment_report
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin-top: 10px
 @media (min-width: 768px) and (max-width: 992px)
     .container_list_events
         margin: 10px auto 0 auto
@@ -379,6 +407,9 @@ footer
         display: none
     .event_time_mob, .event_card_img_mob
         display: block
+    .container_footer
+        justify-content: space-between
+        width: 90%
 @media (min-width: 200px) and (max-width: 768px)
     .event_location_price
         flex-direction: column
@@ -404,11 +435,11 @@ footer
         display: block
     .modal_content
         width: 90%
-    #submit_create_event
+    #submit_create_event, #submit_sent_report
         width: 40%
     textarea
         height: 100px
-    .modal_content_moderation, .modal_content_error, .modal_content_notfound
+    .modal_content_moderation, .modal_content_error, .modal_content_notfound, .modal_content_report
         width: 90%
     .block_spinner
         left: calc( 50% -  1.5em)
@@ -416,6 +447,9 @@ footer
         width: 2.5rem
         height: 2.5rem
         border-width: 2px
+    .container_footer
+        width: 90%
+        justify-content: space-between
 @media (max-width: 768px)
 	// .container_list_events
 	// 	margin-left: 0
@@ -423,12 +457,12 @@ footer
 	// .event_card_date, .container_search_event
 	//   	display: none
 @media (max-width: 576px)
-	.event_title_tag
-		flex-direction: column
-	.event_tag 
-		width: fit-content
-	hr
-		width: 25%
+    .event_title_tag
+        flex-direction: column
+    .event_tag 
+        width: fit-content
+    hr
+        width: 25%
 @media (max-width: 300px)
     .info_icon
         display: none
