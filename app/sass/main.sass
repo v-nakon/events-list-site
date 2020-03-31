@@ -164,6 +164,12 @@ input[type=submit]
     width: 100%
 input[type=submit]:hover
   	opacity: 0.5
+.blocks_group
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-evenly
+.blocks_group .form_group
+    width: 40%
 .form_group
 	display: flex
 	flex-direction: column
@@ -463,6 +469,10 @@ footer
         width: fit-content
     hr
         width: 25%
+    .blocks_group
+        flex-direction: column
+    .blocks_group .form_group
+        width: 100%
 @media (max-width: 300px)
     .info_icon
         display: none

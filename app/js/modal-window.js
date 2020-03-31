@@ -15,6 +15,7 @@ var endDateEvent = "";
 var timeEvent = "";
 var priceEvent = "";
 var categoryEvent = "";
+var subjectEvent = "";
 var tagsElement = "";
 var tagsEvent = [];
 var cityEvent = "";
@@ -31,34 +32,35 @@ var clientTel = "";
 getCategories();
 getTags();
 getCities();
+getSubjects();
 
-createEventBtn.addEventListener("click", function() {
-    modal.style.display = "block";
+createEventBtn.addEventListener("click", function () {
+  modal.style.display = "block";
 });
-closeModal.addEventListener("click", function() {
-    modal.style.display = "none";
+closeModal.addEventListener("click", function () {
+  modal.style.display = "none";
 });
-closeModalModeration.addEventListener("click", function() {
+closeModalModeration.addEventListener("click", function () {
   modalModeration.style.display = "none";
   document.location.href = "/";
 });
-closeModalError.addEventListener("click", function() {
+closeModalError.addEventListener("click", function () {
   modalModerationError.style.display = "none";
   document.location.href = "/";
 });
-submitCreateEvent.addEventListener("click", function() {
+submitCreateEvent.addEventListener("click", function () {
   getModalInputs();
 });
-window.addEventListener("click", function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+window.addEventListener("click", function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 });
 
 function getCategories() {
-    axios.get('https://eventafisha.com/api/v1/categories')
+  axios.get('https://eventafisha.com/api/v1/categories')
     .then(function (response) {
-      for(let item in response.data) {
+      for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_category");
       };
     })
@@ -71,9 +73,9 @@ function getCategories() {
     });
 };
 function getTags() {
-    axios.get('https://eventafisha.com/api/v1/tags')
+  axios.get('https://eventafisha.com/api/v1/tags')
     .then(function (response) {
-      for(let item in response.data) {
+      for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_tags");
       };
     })
@@ -86,10 +88,26 @@ function getTags() {
     });
 };
 function getCities() {
-    axios.get('https://eventafisha.com/api/v1/cities')
+  axios.get('https://eventafisha.com/api/v1/cities')
     .then(function (response) {
-      for(let item in response.data) {
+      for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_city");
+      };
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+};
+function getSubjects() {
+  axios.get('https://eventafisha.com/api/v1/subjects')
+    .then(function (response) {
+      console.log("subjects", response);
+      for (let item in response.data) {
+        addOptionSelect(response.data[item], "modal_subject");
       };
     })
     .catch(function (error) {
@@ -104,51 +122,52 @@ function createEvent() {
   let newStartDate = dateForRequest(startDateEvent);
   let newEndDate = dateForRequest(endDateEvent);
   axios.post('https://eventafisha.com/api/v1/events', {
-        title: nameEvent,
-        start_date: newStartDate,
-        end_date: newEndDate,
-        time: timeEvent,
-        address: addressEvent,
-        cost: priceEvent,
-        city_id: cityEvent,
-        category_id: categoryEvent,
-        tags: tagsEvent, //array
-        // organizer_id: organizerEvent,
-        buy_link: urlEvent,
-        desc: descEvent,
-        image: imgEvent, //file
-        organizer_fio: clientName,
-        organizer_phone: clientTel,
-        organizer_email: clientEmail
-     })
-     .then(function (response) {
-        console.log(response);
-        modal.style.display = "none";
-        modalModeration.style.display = "block";
-     })
-     .catch(function (error) {
-        console.log(error);
-        modalModerationError.style.display = "block";
-     });
+    title: nameEvent,
+    start_date: newStartDate,
+    end_date: newEndDate,
+    time: timeEvent,
+    address: addressEvent,
+    cost: priceEvent,
+    city_id: cityEvent,
+    category_id: categoryEvent,
+    subject_id: subjectEvent,
+    tags: tagsEvent, //array
+    // organizer_id: organizerEvent,
+    buy_link: urlEvent,
+    desc: descEvent,
+    image: imgEvent, //file
+    organizer_fio: clientName,
+    organizer_phone: clientTel,
+    organizer_email: clientEmail
+  })
+    .then(function (response) {
+      console.log(response);
+      modal.style.display = "none";
+      modalModeration.style.display = "block";
+    })
+    .catch(function (error) {
+      console.log(error);
+      modalModerationError.style.display = "block";
+    });
 };
 function addOptionSelect(item, elementSelect) {
-    let selectCategory = document.getElementById(elementSelect);
-    let option = document.createElement("option");
-    option.value = item.id;
-    option.innerHTML = item.title;
-    selectCategory.add(option);
-  }
+  let selectCategory = document.getElementById(elementSelect);
+  let option = document.createElement("option");
+  option.value = item.id;
+  option.innerHTML = item.title;
+  selectCategory.add(option);
+}
 function getBase64() {
-   let file = document.querySelector("#modal_img").files[0];
-   var reader = new FileReader();
-   reader.readAsDataURL(file);
-   reader.onload = function () {
+  let file = document.querySelector("#modal_img").files[0];
+  var reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
     //  console.log(reader.result);
-     imgBase64 = reader.result;
-   };
-   reader.onerror = function (error) {
-     console.log('Error: ', error);
-   };
+    imgBase64 = reader.result;
+  };
+  reader.onerror = function (error) {
+    console.log('Error: ', error);
+  };
 };
 function getModalInputs() {
   nameEvent = document.querySelector("#modal_event_name").value;
@@ -157,6 +176,7 @@ function getModalInputs() {
   // timeEvent = document.querySelector("#modal_time").value;
   priceEvent = document.querySelector("#modal_price").value;
   categoryEvent = document.querySelector("#modal_category").value;
+  subjectEvent = document.querySelector("#modal_subject").value;
   tagsElement = document.querySelector("#modal_tags");
   cityEvent = document.querySelector("#modal_city").value;
   addressEvent = document.querySelector("#modal_address").value;
@@ -184,7 +204,7 @@ function validateDate(value) {
   }
 }
 function dateForRequest(date) {
-  if(date !== '') {
+  if (date !== '') {
     let arr = date.split(".");
     let newDate = arr[2] + '-' + arr[1] + '-' + arr[0];
     console.log(newDate);
@@ -197,6 +217,7 @@ function inputsValidation() {
   let errorStartDate = document.querySelector("#error_start_date");
   let errorPrice = document.querySelector("#error_price");
   let errorCategory = document.querySelector("#error_category");
+  let errorSubject = document.querySelector("#error_subject");
   let errorTags = document.querySelector("#error_tags");
   let errorCity = document.querySelector("#error_city");
   let errorAddress = document.querySelector("#error_address");
@@ -211,7 +232,7 @@ function inputsValidation() {
   } else {
     errorTitle.innerHTML = '';
   }
-  if(validateDate(startDateEvent)) {
+  if (validateDate(startDateEvent)) {
     errorStartDate.innerHTML = '';
   } else {
     errorStartDate.innerHTML = 'Поле "Дата начала мероприятия" пустое или имеет не правильный формат!';
@@ -228,6 +249,12 @@ function inputsValidation() {
     return;
   } else {
     errorCategory.innerHTML = '';
+  }
+  if (subjectEvent === "") {
+    errorSubject.innerHTML = 'Поле "Тематика мероприятия" не должно быть пустым!';
+    return;
+  } else {
+    errorSubject.innerHTML = '';
   }
   if (tagsEvent === "") {
     errorTags.innerHTML = 'Поле "Теги мероприятия" не должно быть пустым!';
@@ -279,30 +306,30 @@ function inputsValidation() {
   }
   createEvent();
 };
-$(function(){
-	$('.datepicker_event_start').datepicker({
-	   onSelect: function (dateText, inst) {
+$(function () {
+  $('.datepicker_event_start').datepicker({
+    onSelect: function (dateText, inst) {
       startDateEvent = dateText;
-	   },
-     minDate: new Date(),
-     autoClose: true
-	});
- });
+    },
+    minDate: new Date(),
+    autoClose: true
+  });
+});
 
- $(function(){
-	$('.datepicker_event_end').datepicker({
-	   onSelect: function (dateText, inst) {
+$(function () {
+  $('.datepicker_event_end').datepicker({
+    onSelect: function (dateText, inst) {
       endDateEvent = dateText;
-	   },
-     minDate: new Date(),
-     autoClose: true
-	});
- });
+    },
+    minDate: new Date(),
+    autoClose: true
+  });
+});
 $('.datepicker_time').datepicker({
   timepicker: true,
   onlyTimepicker: true,
   classes: 'only-timepicker',
   onSelect: function (dateText, inst) {
-        timeEvent = dateText;
-    	   },
+    timeEvent = dateText;
+  },
 });

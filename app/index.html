@@ -86,6 +86,12 @@
             <option value="">Все города</option>
           </select>
         </div>
+        <div class="form_group">
+          <label for="subject_search_mob">Тематика</label>
+          <select id="subject_search_mob">
+            <option value="">Все тематики</option>
+          </select>
+        </div>
         <input class="btn_search" id="btn_search_mob" type="submit" value="Поиск" />
       </div>
     </div>
@@ -123,12 +129,21 @@
             <input type="text" id="modal_price" placeholder="Цена.." />
             <span id="error_price" class="error_msg"></span>
           </div>
-          <div class="form_group">
-            <label for="modal_category">Категория мероприятия</label>
-            <select id="modal_category" name="modal_category">
-              <option value="">Выберите категорию мероприятия</option>
-            </select>
-            <span id="error_category" class="error_msg"></span>
+          <div class="blocks_group">
+            <div class="form_group">
+              <label for="modal_category">Категория мероприятия</label>
+              <select id="modal_category" name="modal_category">
+                <option value="">Выберите категорию мероприятия</option>
+              </select>
+              <span id="error_category" class="error_msg"></span>
+            </div>
+            <div class="form_group">
+              <label for="modal_subject">Категория тематика</label>
+              <select id="modal_subject" name="modal_subject">
+                <option value="">Выберите тематику мероприятия</option>
+              </select>
+              <span id="error_subject" class="error_msg"></span>
+            </div>
           </div>
           <div class="form_group">
             <label for="modal_tags">Теги мероприятия</label>
@@ -326,6 +341,12 @@
           <label for="location">Город</label>
           <select id="location">
             <option value="">Все города</option>
+          </select>
+        </div>
+        <div class="form_group">
+          <label for="subject_search">Тематика</label>
+          <select id="subject_search">
+            <option value="">Все тематики</option>
           </select>
         </div>
         <input type="submit" id="btn_search" value="Поиск" />
