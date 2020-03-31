@@ -4,6 +4,7 @@ let idEvent = urlParams.get('id');
 
 axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     .then(function (response) {
+        checkMetaData(response.data);
         document.title = response.data.title;
         setTitle(response.data);
         setDate(response.data);
@@ -23,7 +24,25 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
     .then(function () {
         // always executed
     });
-
+function checkMetaData(response) {
+    if (response.seo.meta_title !== null) {
+        setMetaData("title", response.seo.meta_title);
+    } else {
+        setMetaData("title", response.title);
+    }
+    if (response.seo.meta_desc !== null) {
+        setMetaData("description", response.seo.meta_desc);
+    }
+    if (response.seo.meta_keywords !== null) {
+        setMetaData("keywords", response.seo.meta_keywords);
+    }
+}
+function setMetaData(name, data) {
+    let meta = document.createElement('meta');
+    meta.name = name;
+    meta.content = data;
+    document.querySelector("head").appendChild(meta);
+}
 function setTitle(obj) {
     let title = obj.title;
     let titleElement = document.querySelector(".event_info_title");
@@ -65,15 +84,15 @@ function setDescription(obj) {
     let description_parsed = obj.desc;
     let description_first = obj.description_first;
     let description_second = obj.description_second;
-    console.log(description_first + " " + description_second);
-    if (description_first !== null || description_first !== null) {
+    let descriptionElementPars = document.querySelector(".description_parsed");
+    descriptionElementPars.innerHTML = description_parsed;
+    if (description_first !== null) {
         let descriptionElement1 = document.querySelector(".description_first");
         descriptionElement1.innerHTML = description_first;
+    }
+    if (description_second !== null) {
         let descriptionElement2 = document.querySelector(".description_second");
         descriptionElement2.innerHTML = description_second;
-    } else {
-        let descriptionElementPars = document.querySelector(".description_parsed");
-        descriptionElementPars.innerHTML = description_parsed;
     }
 };
 function setImg(obj) {
