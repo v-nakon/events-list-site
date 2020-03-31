@@ -105,7 +105,6 @@ function getCities() {
 function getSubjects() {
   axios.get('https://eventafisha.com/api/v1/subjects')
     .then(function (response) {
-      console.log("subjects", response);
       for (let item in response.data) {
         addOptionSelect(response.data[item], "modal_subject");
       };

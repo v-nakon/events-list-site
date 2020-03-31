@@ -153,7 +153,6 @@ function getCategories() {
   axios
     .get("https://eventafisha.com/api/v1/categories")
     .then(function (response) {
-      console.log(response)
       for (let item in response.data) {
         addCatToSearch(response.data[item], ".container_category");
         addCatToSearch(response.data[item], ".container_category_mob");
@@ -170,7 +169,6 @@ function getCategories() {
 function getSubjects() {
   axios.get('https://eventafisha.com/api/v1/subjects')
     .then(function (response) {
-      console.log("subjects", response);
       for (let item in response.data) {
         addOptionSelect(response.data[item], "subject_search");
         addOptionSelect(response.data[item], "subject_search_mob");
@@ -416,7 +414,7 @@ function paginationAjax(name, title, city, dateStart, dateEnd, category, subject
         // searchNameMob.value = "";
         // searchLocationMob.value = "";
       }
-      window.scrollBy(0, 0);
+      window.scrollTo(0, 0);
     }
   });
 }
