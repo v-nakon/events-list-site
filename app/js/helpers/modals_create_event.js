@@ -1,10 +1,10 @@
 
-import { getCatigories } from "./helpers/requests.js";
-import { getTags } from "./helpers/requests.js";
-import { getCities } from "./helpers/requests.js";
-import { getSubjects } from "./helpers/requests.js";
-import { createUserEvent } from "./helpers/requests.js";
-import { addOptionSelect } from "./helpers/help_create_elements.js";
+import { getCategories } from "./requests.js";
+import { getTags } from "./requests.js";
+import { getCities } from "./requests.js";
+import { getSubjects } from "./requests.js";
+import { createUserEvent } from "./requests.js";
+import { addOptionSelect } from "./help_create_elements.js";
 
 var modal = document.querySelector(".container_modal");
 var createEventBtn = document.querySelector(".container_create_event");
@@ -35,7 +35,7 @@ var clientEmail = "";
 var clientTel = "";
 
 // END INPUTS VARIABLE
-getCatigoriesData();
+getCategoriesData();
 getTagsData();
 getCitiesData();
 getSubjectsData();
@@ -66,8 +66,8 @@ document.querySelector("#modal_img").addEventListener('change', (event) => {
   getBase64();
 });
 
-function getCatigoriesData() {
-  getCatigories().then(response => {
+function getCategoriesData() {
+  getCategories().then(response => {
     for (let item in response.data) {
       addOptionSelect(response.data[item], "modal_category");
     };

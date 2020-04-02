@@ -17,7 +17,7 @@ export function getEvent(idEvent) {
     });
 };
 
-export function getCatigories() {
+export function getCategories() {
     return new Promise((res, rej) => {
         axios
             .get(url + "categories")
