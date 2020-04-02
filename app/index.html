@@ -169,7 +169,8 @@
           </div>
           <div class="form_group">
             <label for="modal_img">Главная картинка мероприятия</label>
-            <input type="file" id="modal_img" accept="image/*" onchange="getBase64()" />
+            <!-- <input type="file" id="modal_img" accept="image/*" onchange="getBase64()" /> -->
+            <input type="file" id="modal_img" accept="image/*" />
             <span id="error_img" class="error_msg"></span>
           </div>
           <div class="form_group">
@@ -393,7 +394,7 @@
   </script>
   <script src="js/axios.min.js"></script>
   <script src="js/scripts.min.js"></script>
-  <script src="js/modal-window.js"></script>
+  <script type="module" src="js/modal-window.js"></script>
   <script src="js/report_msg.js"></script>
 </body>
 

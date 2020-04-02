@@ -1,9 +1,14 @@
+import { getEvent } from "./helpers/requests.js";
+
 let urlStringParams = window.location.search;
 let urlParams = new URLSearchParams(urlStringParams);
 let idEvent = urlParams.get('id');
 
-axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
-    .then(function (response) {
+getEventData(idEvent);
+
+
+function getEventData(idEvent) {
+    getEvent(idEvent).then(response => {
         checkMetaData(response.data);
         document.title = response.data.title;
         setTitle(response.data);
@@ -16,14 +21,11 @@ axios.get('https://eventafisha.com/api/v1/events/' + idEvent)
         setCategory(response.data);
         setTags(response.data);
         setPromo(response.data);
-    })
-    .catch(function (error) {
-        // handle error
+    }).catch(error => {
         console.log(error);
     })
-    .then(function () {
-        // always executed
-    });
+};
+
 function checkMetaData(response) {
     if (response.seo.meta_title !== null) {
         setMetaData("title", response.seo.meta_title);
@@ -77,7 +79,7 @@ function setBuyLink(obj) {
         document.querySelector(".container_btn").classList.add("hide_element");
     } else {
         let buyBtn = document.getElementById("btn_buy");
-        buyBtn.addEventListener("click", () => window.open(redirectLink));
+        buyBtn.addEventListener("click", () => document.location.href = redirectLink);
     }
 };
 function setDescription(obj) {

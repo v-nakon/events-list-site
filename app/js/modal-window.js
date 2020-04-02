@@ -1,4 +1,11 @@
 
+import { getCatigories } from "./helpers/requests.js";
+import { getTags } from "./helpers/requests.js";
+import { getCities } from "./helpers/requests.js";
+import { getSubjects } from "./helpers/requests.js";
+import { createUserEvent } from "./helpers/requests.js";
+import { addOptionSelect } from "./helpers/help_create_elements.js";
+
 var modal = document.querySelector(".container_modal");
 var createEventBtn = document.querySelector(".container_create_event");
 var closeModal = document.querySelector(".close_modal");
@@ -21,7 +28,6 @@ var tagsEvent = [];
 var cityEvent = "";
 var addressEvent = "";
 var descEvent = "";
-var imgEvent = "";
 // let organizerEvent = document.querySelector("#modal_organizer").value;
 var urlEvent = "";
 var clientName = "";
@@ -29,10 +35,10 @@ var clientEmail = "";
 var clientTel = "";
 
 // END INPUTS VARIABLE
-getCategories();
-getTags();
-getCities();
-getSubjects();
+getCatigoriesData();
+getTagsData();
+getCitiesData();
+getSubjectsData();
 
 createEventBtn.addEventListener("click", function () {
   modal.style.display = "block";
@@ -56,71 +62,51 @@ window.addEventListener("click", function (event) {
     modal.style.display = "none";
   }
 });
+document.querySelector("#modal_img").addEventListener('change', (event) => {
+  getBase64();
+});
 
-function getCategories() {
-  axios.get('https://eventafisha.com/api/v1/categories')
-    .then(function (response) {
-      for (let item in response.data) {
-        addOptionSelect(response.data[item], "modal_category");
-      };
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+function getCatigoriesData() {
+  getCatigories().then(response => {
+    for (let item in response.data) {
+      addOptionSelect(response.data[item], "modal_category");
+    };
+  }).catch(error => {
+    console.log(error);
+  })
 };
-function getTags() {
-  axios.get('https://eventafisha.com/api/v1/tags')
-    .then(function (response) {
-      for (let item in response.data) {
-        addOptionSelect(response.data[item], "modal_tags");
-      };
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+function getTagsData() {
+  getTags().then(response => {
+    for (let item in response.data) {
+      addOptionSelect(response.data[item], "modal_tags");
+    };
+  }).catch(error => {
+    console.log(error);
+  })
 };
-function getCities() {
-  axios.get('https://eventafisha.com/api/v1/cities')
-    .then(function (response) {
-      for (let item in response.data) {
-        addOptionSelect(response.data[item], "modal_city");
-      };
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+function getCitiesData() {
+  getCities().then(response => {
+    for (let item in response.data) {
+      addOptionSelect(response.data[item], "modal_city");
+    };
+  }).catch(error => {
+    console.log(error);
+  })
 };
-function getSubjects() {
-  axios.get('https://eventafisha.com/api/v1/subjects')
-    .then(function (response) {
-      for (let item in response.data) {
-        addOptionSelect(response.data[item], "modal_subject");
-      };
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+function getSubjectsData() {
+  getSubjects().then(response => {
+    for (let item in response.data) {
+      addOptionSelect(response.data[item], "modal_subject");
+    };
+  }).catch(error => {
+    console.log(error);
+  })
 };
+
 function createEvent() {
   let newStartDate = dateForRequest(startDateEvent);
   let newEndDate = dateForRequest(endDateEvent);
-  axios.post('https://eventafisha.com/api/v1/events', {
+  let meta = {
     title: nameEvent,
     start_date: newStartDate,
     end_date: newEndDate,
@@ -131,37 +117,26 @@ function createEvent() {
     category_id: categoryEvent,
     subject_id: subjectEvent,
     tags: tagsEvent, //array
-    // organizer_id: organizerEvent,
     buy_link: urlEvent,
     desc: descEvent,
-    image: imgEvent, //file
+    image: imgBase64, //file
     organizer_fio: clientName,
     organizer_phone: clientTel,
     organizer_email: clientEmail
+  }
+  createUserEvent(meta).then(response => {
+    modal.style.display = "none";
+    modalModeration.style.display = "block";
+  }).catch(error => {
+    console.log(error);
+    modalModerationError.style.display = "block";
   })
-    .then(function (response) {
-      console.log(response);
-      modal.style.display = "none";
-      modalModeration.style.display = "block";
-    })
-    .catch(function (error) {
-      console.log(error);
-      modalModerationError.style.display = "block";
-    });
-};
-function addOptionSelect(item, elementSelect) {
-  let selectCategory = document.getElementById(elementSelect);
-  let option = document.createElement("option");
-  option.value = item.id;
-  option.innerHTML = item.title;
-  selectCategory.add(option);
 }
 function getBase64() {
   let file = document.querySelector("#modal_img").files[0];
   var reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = function () {
-    //  console.log(reader.result);
     imgBase64 = reader.result;
   };
   reader.onerror = function (error) {
@@ -170,9 +145,6 @@ function getBase64() {
 };
 function getModalInputs() {
   nameEvent = document.querySelector("#modal_event_name").value;
-  // startDateEvent = document.querySelector("#modal_start_date").value;
-  // endDateEvent = document.querySelector("#modal_end_date").value;
-  // timeEvent = document.querySelector("#modal_time").value;
   priceEvent = document.querySelector("#modal_price").value;
   categoryEvent = document.querySelector("#modal_category").value;
   subjectEvent = document.querySelector("#modal_subject").value;
@@ -180,7 +152,6 @@ function getModalInputs() {
   cityEvent = document.querySelector("#modal_city").value;
   addressEvent = document.querySelector("#modal_address").value;
   descEvent = document.querySelector("#modal_description").value;
-  imgEvent = imgBase64;
   urlEvent = document.querySelector("#modal_url").value;
   clientName = document.querySelector("#modal_client_name").value;
   clientEmail = document.querySelector("#modal_client_email").value;
@@ -188,7 +159,6 @@ function getModalInputs() {
   for (var i = 0; i < tagsElement.length; i++) {
     if (tagsElement.options[i].selected) tagsEvent.push(tagsElement.options[i].value);
   };
-
   inputsValidation();
 };
 function validateDate(value) {
@@ -206,7 +176,6 @@ function dateForRequest(date) {
   if (date !== '') {
     let arr = date.split(".");
     let newDate = arr[2] + '-' + arr[1] + '-' + arr[0];
-    console.log(newDate);
     return newDate;
   }
   return date;
