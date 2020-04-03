@@ -196,6 +196,7 @@ export function paginationAjax(name, title, city, dateStart, dateEnd, category, 
     ajax: {
       beforeSend: function () {
         // container.prev().html("Загрузка данных");
+        removeEventList();
         spinner.classList.remove("hide_spinner");
       }
     },
@@ -206,7 +207,7 @@ export function paginationAjax(name, title, city, dateStart, dateEnd, category, 
       if (response.length === 0) {
         modalNotFound.style.display = "block";
       } else {
-        removeEventList();
+        // removeEventList();
         $.each(response, function (index, item) {
           createEventCard(item);
         });

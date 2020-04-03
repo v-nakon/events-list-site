@@ -3,11 +3,12 @@ import { getEvent } from "./helpers/requests.js";
 let urlStringParams = window.location.search;
 let urlParams = new URLSearchParams(urlStringParams);
 let idEvent = urlParams.get('id');
-
+var spinnerEvent = document.querySelector(".block_spinner");
+var containerEvent = document.querySelector(".container_event");
 getEventData(idEvent);
-
-
 function getEventData(idEvent) {
+    containerEvent.classList.add("show");
+    spinnerEvent.classList.add("hide_spinner");
     getEvent(idEvent).then(response => {
         checkMetaData(response.data);
         document.title = response.data.title;
