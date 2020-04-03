@@ -1,4 +1,5 @@
 import { getEvent } from "./helpers/requests.js";
+import { orderNumber } from "./helpers/requests.js";
 
 let urlStringParams = window.location.search;
 let urlParams = new URLSearchParams(urlStringParams);
@@ -26,7 +27,14 @@ function getEventData(idEvent) {
         console.log(error);
     })
 };
-
+function setOrderNumber(idEvent) {
+    orderNumber(idEvent).then(response => {
+        console.log("Num order", response)
+        goRedirectPage(idEvent);
+    }).catch(error => {
+        console.log(error);
+    })
+};
 function checkMetaData(response) {
     if (response.seo.meta_title !== null) {
         setMetaData("title", response.seo.meta_title);
@@ -75,14 +83,19 @@ function setPrice(obj) {
 function setBuyLink(obj) {
     let buyLink = obj.buy_link;
     let id = obj.id;
-    let redirectLink = "/redirect-page.html?id=" + id;
     if (buyLink === null) {
         document.querySelector(".container_btn").classList.add("hide_element");
     } else {
         let buyBtn = document.getElementById("btn_buy");
-        buyBtn.addEventListener("click", () => document.location.href = redirectLink);
+        buyBtn.addEventListener("click", function () {
+            setOrderNumber(idEvent);
+        });
     }
 };
+function goRedirectPage(id) {
+    let redirectLink = "/redirect-page.html?id=" + id;
+    document.location.href = redirectLink;
+}
 function setDescription(obj) {
     let description_parsed = obj.desc;
     let description_first = obj.description_first;

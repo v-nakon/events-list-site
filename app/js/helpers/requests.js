@@ -116,3 +116,20 @@ export function sentReport(meta) {
             });
     });
 };
+
+export function orderNumber(idEvent) {
+    return new Promise((res, rej) => {
+        axios
+            .put(url + "events/order-number/" + idEvent)
+            .then(function (response) {
+                let data = response.data;
+                res({
+                    data: data
+                })
+            })
+            .catch(function (error) {
+                rej(error.response.data);
+                console.log(error);
+            });
+    });
+};
