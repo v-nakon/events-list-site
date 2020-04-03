@@ -100,3 +100,19 @@ export function createUserEvent(meta) {
             });
     });
 };
+
+export function sentReport(meta) {
+    return new Promise((res, rej) => {
+        axios.post(url + "error-message", meta)
+            .then(function (response) {
+                let data = response.data;
+                res({
+                    data: data
+                })
+            })
+            .catch(function (error) {
+                rej(error.response.data);
+                errorHandle(error.response);
+            });
+    });
+};
