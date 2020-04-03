@@ -29,7 +29,7 @@ function getEventData(idEvent) {
 };
 function setOrderNumber(idEvent) {
     orderNumber(idEvent).then(response => {
-        console.log("Num order", response)
+        // console.log("Num order", response)
         goRedirectPage(idEvent);
     }).catch(error => {
         console.log(error);
@@ -82,7 +82,6 @@ function setPrice(obj) {
 };
 function setBuyLink(obj) {
     let buyLink = obj.buy_link;
-    let id = obj.id;
     if (buyLink === null) {
         document.querySelector(".container_btn").classList.add("hide_element");
     } else {
