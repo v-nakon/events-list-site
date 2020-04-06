@@ -25,7 +25,11 @@ function getEventData(idEvent) {
         setPromo(response.data);
     }).catch(error => {
         console.log(error);
-    })
+        document.querySelector(".container").classList.add("hide_element");
+        document
+            .querySelector(".container_notfound")
+            .classList.remove("hide_element");
+    });
 };
 function setOrderNumber(idEvent) {
     orderNumber(idEvent).then(response => {
@@ -63,7 +67,12 @@ function setDate(obj) {
     let startDate = new Date(obj.start_date);
     let endDate = new Date(obj.end_date);
     let dateElement = document.querySelector(".location_date");
-    dateElement.innerHTML = startDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
+    if (startDate.toLocaleDateString() === endDate.toLocaleDateString()) {
+        dateElement.innerHTML = startDate.toLocaleDateString();
+    } else {
+        dateElement.innerHTML =
+            startDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
+    }
 };
 function setLocation(obj) {
     let location = obj.address;

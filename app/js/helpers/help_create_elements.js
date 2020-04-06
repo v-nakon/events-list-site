@@ -17,7 +17,7 @@ export function createEventCard(objItem) {
     objItem.images +
     `" alt="title">
           <div class="event_time">` +
-    new Date(objItem.start_date).toLocaleDateString() +
+    setDates(objItem) +
     `</div>
       </div>
       <div class="event_card_info">
@@ -35,7 +35,7 @@ export function createEventCard(objItem) {
     `</div>
           </div>
           <div class="event_time_mob">` +
-    new Date(objItem.start_date).toLocaleDateString() +
+    setDates(objItem) +
     `</div>
           <div class="event_location_price">
               <div class="event_location">
@@ -90,5 +90,14 @@ function checkCity(objCity) {
     return "";
   } else {
     return objCity.title + ", ";
+  }
+}
+function setDates(objItem) {
+  let startDate = new Date(objItem.start_date).toLocaleDateString();
+  let endDate = new Date(objItem.end_date).toLocaleDateString();
+  if (startDate === endDate) {
+    return startDate;
+  } else {
+    return startDate + "-" + endDate;
   }
 }

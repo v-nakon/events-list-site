@@ -87,6 +87,7 @@ hr
     flex-direction: column
     color: $color-grey
     margin: 0 15px
+    min-width: 125px
 .event_title_tag
     // display: flex
 .event_card_img
@@ -104,6 +105,7 @@ hr
 .event_time
     margin-top: 3px
     font-weight: 500
+    font-size: 13px
 .title_img_mob
     display: flex
     align-items: center
@@ -388,14 +390,14 @@ footer
         transform: rotate(360deg)
 // end block spinner
 // start redirect-page style
-.container_redirect_page
+.container_redirect_page, .container_notfound
 	height: 100vh
 	background-color: #f4f4f4
 	display: flex
 	flex-direction: column
 	justify-content: center
 	align-items: center
-.redirect_page_title
+.redirect_page_title, .notfound_title
 	color: #999
 	font-size: 30px
 	margin-bottom: 40px
