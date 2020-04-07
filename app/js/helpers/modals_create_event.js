@@ -162,7 +162,7 @@ function getModalInputs() {
   inputsValidation();
 };
 function validateDate(value) {
-  console.log(value);
+  // console.log(value);
   var arrD = value.split(".");
   arrD[1] -= 1;
   var d = new Date(arrD[2], arrD[1], arrD[0]);

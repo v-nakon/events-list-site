@@ -76,8 +76,12 @@ function setDate(obj) {
 };
 function setLocation(obj) {
     let location = obj.address;
+    let city = "";
+    if (obj.city !== null) {
+        city = obj.city.title + ", ";
+    }
     let locationElement = document.querySelector(".location_name");
-    locationElement.innerHTML = location;
+    locationElement.innerHTML = city + location;
 };
 function setPrice(obj) {
     let price = obj.cost;
