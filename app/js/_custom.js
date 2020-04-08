@@ -25,12 +25,12 @@ closeModalNotfound.addEventListener("click", function () {
 
 let btnSearch = document.getElementById("btn_search");
 btnSearch.addEventListener("click", () =>
-  searchTitleCity("event_name", "location", "subject_search")
+  searchEvent("event_name", "location", "subject_search")
 );
 
 let btnSearchMob = document.getElementById("btn_search_mob");
 btnSearchMob.addEventListener("click", () =>
-  searchTitleCity("event_name_mob", "location_mob", "subject_search_mob")
+  searchEvent("event_name_mob", "location_mob", "subject_search_mob")
 );
 
 // media and search block show/hide for mob ver
@@ -106,9 +106,6 @@ $(function () {
   });
 });
 
-$(function () {
-  paginationAjax("#pagination", "", "", "", "", "", "");
-});
 
 // search function
 export var fromDateSearch = "";
@@ -121,9 +118,13 @@ export function setCategorySearch(value) {
   categorySearch = value;
 };
 
-function searchTitleCity(titleEl, cityEl, subjectEl) {
+function searchEvent(titleEl, cityEl, subjectEl, searchCityID) {
   nameEventSearch = document.getElementById(titleEl).value;
-  cityEventSearch = document.getElementById(cityEl).value;
+  if (searchCityID === undefined) {
+    cityEventSearch = document.getElementById(cityEl).value;
+  } else {
+    cityEventSearch = searchCityID;
+  }
   subjectSearch = document.getElementById(subjectEl).value;
   // console.log("test sub", subjectSearch);
   paginationAjax(
@@ -230,7 +231,32 @@ function pushEnterBtn(event) {
   if (event.which == 13 || event.keyCode == 13) {
     let getElTag = document.activeElement.tagName;
     if (getElTag === "INPUT" || getElTag === "SELECT") {
-      searchTitleCity("event_name", "location", "subject_search");
+      searchEvent("event_name", "location", "subject_search");
     }
+  }
+}
+
+let urlStringParams = window.location.search;
+let urlParams = new URLSearchParams(urlStringParams);
+let categoryIdParam = urlParams.get("cat_id");
+let cityIdParam = urlParams.get("city_id");
+// console.log(cityIdParam);
+if (widthMedia.matches) {
+  if (categoryIdParam !== null) {
+    categorySearch = categoryIdParam;
+    searchEvent("event_name", "location", "subject_search");
+  } else if (cityIdParam !== null) {
+    searchEvent("event_name", "location", "subject_search", cityIdParam);
+  } else {
+    paginationAjax("#pagination", "", "", "", "", "", "");
+  }
+} else {
+  if (categoryIdParam !== null) {
+    categorySearch = categoryIdParam;
+    searchEvent("event_name_mob", "location_mob", "subject_search_mob");
+  } else if (cityIdParam !== null) {
+    searchEvent("event_name_mob", "location_mob", "subject_search_mob", cityIdParam);
+  } else {
+    paginationAjax("#pagination", "", "", "", "", "", "");
   }
 }
