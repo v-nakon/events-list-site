@@ -23,6 +23,7 @@ function getEventData(idEvent) {
         setCategory(response.data);
         setTags(response.data);
         setPromo(response.data);
+        setSocialLink(response.data);
     }).catch(error => {
         console.log(error);
         document.querySelector(".container").classList.add("hide_element");
@@ -159,3 +160,15 @@ function renameBtn() {
     let btn = document.querySelector("#btn_buy");
     btn.value = "РЕГИСТРАЦИЯ"
 };
+function setSocialLink(obj) {
+    let facebookEl = document.querySelector(".facebook");
+    let instagramEl = document.querySelector(".instagram");
+    if (obj.facebook_link !== null) {
+        facebookEl.href = obj.facebook_link;
+        facebookEl.classList.remove("hide_element");
+    }
+    if (obj.instagram_link !== null) {
+        instagramEl.href = obj.instagram_link;
+        instagramEl.classList.remove("hide_element");
+    }
+}
